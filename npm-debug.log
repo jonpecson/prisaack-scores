@@ -1,0 +1,115 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'firebase',
+1 verbose cli   'angularfire',
+1 verbose cli   '--save' ]
+2 info using npm@1.4.14
+3 info using node@v0.10.29
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 warn package.json ionic-project@1.0.0 No repository field.
+6 verbose readDependencies using package.json deps
+7 verbose cache add [ 'firebase', null ]
+8 verbose cache add name=undefined spec="firebase" args=["firebase",null]
+9 verbose parsed url { protocol: null,
+9 verbose parsed url   slashes: null,
+9 verbose parsed url   auth: null,
+9 verbose parsed url   host: null,
+9 verbose parsed url   port: null,
+9 verbose parsed url   hostname: null,
+9 verbose parsed url   hash: null,
+9 verbose parsed url   search: null,
+9 verbose parsed url   query: null,
+9 verbose parsed url   pathname: 'firebase',
+9 verbose parsed url   path: 'firebase',
+9 verbose parsed url   href: 'firebase' }
+10 verbose cache add [ 'angularfire', null ]
+11 verbose cache add name=undefined spec="angularfire" args=["angularfire",null]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: 'angularfire',
+12 verbose parsed url   path: 'angularfire',
+12 verbose parsed url   href: 'angularfire' }
+13 silly lockFile 92f5e8df-firebase firebase
+14 verbose lock firebase C:\Users\Jp Pecson\AppData\Roaming\npm-cache\92f5e8df-firebase.lock
+15 silly lockFile d327749f-angularfire angularfire
+16 verbose lock angularfire C:\Users\Jp Pecson\AppData\Roaming\npm-cache\d327749f-angularfire.lock
+17 silly lockFile 92f5e8df-firebase firebase
+18 silly lockFile 92f5e8df-firebase firebase
+19 silly lockFile d327749f-angularfire angularfire
+20 silly lockFile d327749f-angularfire angularfire
+21 verbose addNamed [ 'firebase', '' ]
+22 verbose addNamed [ null, '*' ]
+23 silly lockFile 2bddc103-firebase firebase@
+24 verbose lock firebase@ C:\Users\Jp Pecson\AppData\Roaming\npm-cache\2bddc103-firebase.lock
+25 verbose addNamed [ 'angularfire', '' ]
+26 verbose addNamed [ null, '*' ]
+27 silly lockFile 7dc4e5e4-angularfire angularfire@
+28 verbose lock angularfire@ C:\Users\Jp Pecson\AppData\Roaming\npm-cache\7dc4e5e4-angularfire.lock
+29 silly addNameRange { name: 'firebase', range: '*', hasData: false }
+30 silly addNameRange { name: 'angularfire', range: '*', hasData: false }
+31 verbose url raw firebase
+32 verbose url resolving [ 'https://registry.npmjs.org/', './firebase' ]
+33 verbose url resolved https://registry.npmjs.org/firebase
+34 info trying registry request attempt 1 at 10:09:16
+35 http GET https://registry.npmjs.org/firebase
+36 verbose url raw angularfire
+37 verbose url resolving [ 'https://registry.npmjs.org/', './angularfire' ]
+38 verbose url resolved https://registry.npmjs.org/angularfire
+39 info trying registry request attempt 1 at 10:09:16
+40 http GET https://registry.npmjs.org/angularfire
+41 http 404 https://registry.npmjs.org/angularfire
+42 verbose headers { date: 'Sat, 16 Aug 2014 02:09:19 GMT',
+42 verbose headers   server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+42 verbose headers   'content-type': 'application/json',
+42 verbose headers   'cache-control': 'max-age=0',
+42 verbose headers   'content-length': '52',
+42 verbose headers   'accept-ranges': 'bytes',
+42 verbose headers   via: '1.1 varnish',
+42 verbose headers   age: '0',
+42 verbose headers   'x-served-by': 'cache-lax1425-LAX',
+42 verbose headers   'x-cache': 'MISS',
+42 verbose headers   'x-cache-hits': '0',
+42 verbose headers   'x-timer': 'S1408154959.412770,VS0,VE80',
+42 verbose headers   'keep-alive': 'timeout=10, max=50',
+42 verbose headers   connection: 'Keep-Alive' }
+43 silly registry.get cb [ 404,
+43 silly registry.get   { date: 'Sat, 16 Aug 2014 02:09:19 GMT',
+43 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+43 silly registry.get     'content-type': 'application/json',
+43 silly registry.get     'cache-control': 'max-age=0',
+43 silly registry.get     'content-length': '52',
+43 silly registry.get     'accept-ranges': 'bytes',
+43 silly registry.get     via: '1.1 varnish',
+43 silly registry.get     age: '0',
+43 silly registry.get     'x-served-by': 'cache-lax1425-LAX',
+43 silly registry.get     'x-cache': 'MISS',
+43 silly registry.get     'x-cache-hits': '0',
+43 silly registry.get     'x-timer': 'S1408154959.412770,VS0,VE80',
+43 silly registry.get     'keep-alive': 'timeout=10, max=50',
+43 silly registry.get     connection: 'Keep-Alive' } ]
+44 silly lockFile 7dc4e5e4-angularfire angularfire@
+45 silly lockFile 7dc4e5e4-angularfire angularfire@
+46 error 404 404 Not Found: angularfire
+46 error 404
+46 error 404 'angularfire' is not in the npm registry.
+46 error 404 You should bug the author to publish it
+46 error 404 It was specified as a dependency of 'ionic-project'
+46 error 404
+46 error 404 Note that you can also install from a
+46 error 404 tarball, folder, or http url, or git url.
+47 error System Windows_NT 6.2.9200
+48 error command "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "firebase" "angularfire" "--save"
+49 error cwd C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores
+50 error node -v v0.10.29
+51 error npm -v 1.4.14
+52 error code E404
+53 verbose exit [ 1, true ]

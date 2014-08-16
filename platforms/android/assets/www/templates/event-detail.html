@@ -1,0 +1,43 @@
+<ion-view title="Day 1">
+  <ion-content has-header="true">
+
+	<div class="item item-input-inset">		
+	     <label class="item-input-wrapper">
+		    <i class="icon ion-search placeholder-icon"></i>
+		    <input type="text" placeholder="Search" ng-model="searchKey">
+		 </label>
+	</div>
+
+
+	  <div class="list">
+
+        <div ng-repeat="time in events|groupBy:'time'">
+
+	        <div class="item item-divider">
+			    {{time}}
+			</div>
+
+	        
+
+			<a  class="item  item-icon-left item-icon-right" 
+				ng-repeat="game in games = (events | filter: {time: time})">
+				
+				<i class="icon icon-basketball35"></i>
+
+				{{game.player1}} vs. {{game.player2}}
+			 	<p>{{game.sportname}}</p>
+			 	<p>{{game.location}}</p>
+
+			 	<i class="badge badge-balanced ion-trophy">&nbsp; Winner : KCC</i>
+			</a>
+
+	    
+
+	        </div>
+
+      </div>
+
+
+
+  </ion-content>
+</ion-view>

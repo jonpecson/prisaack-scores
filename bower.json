@@ -1,0 +1,17 @@
+{
+  "name": "PrisaackScores",
+  "private": "true",
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.11"
+  },
+  "resolutions": {
+    "angular": "1.2.21"
+  },
+  "dependencies": {
+    "firebase": "~1.0.19",
+    "angularfire": "~0.8.0",
+     "moment" : "~2.4.0"
+
+
+  }
+}

@@ -1,0 +1,194 @@
+/* Empty. Add your own CSS if you like */
+
+.ionic-logo {
+  display: block;
+  margin: 15px auto;
+  width: 96px;
+  height: 96px;
+}
+
+.popup-body .datetimepicker {
+  min-height: 221px;
+}
+.popup-body .datetimepicker table {
+  width: 100%;
+}
+/*
+ * Use ionic icons instead of bootstrap's glyphicons 
+ * for arrows in the datetimepicker.
+ */
+.glyphicon {
+  vertical-align: top;
+  display: inline-block;
+  font-family: "Ionicons";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.glyphicon:before {
+  vertical-align: top;
+  font-size: 32px;
+  line-height: 32px;
+  padding-right: 2px;
+  padding-left: 2px;
+  display: inline-block;
+  padding: 0 0 1px 0;
+}
+.glyphicon-arrow-right:before {
+  content: "\f10a";
+}
+.glyphicon-arrow-left:before{
+  content: "\f107";
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:url('fonts/icomoon.eot?-7i7kth');
+  src:url('fonts/icomoon.eot?#iefix-7i7kth') format('embedded-opentype'),
+    url('fonts/icomoon.woff?-7i7kth') format('woff'),
+    url('fonts/icomoon.ttf?-7i7kth') format('truetype'),
+    url('fonts/icomoon.svg?-7i7kth#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-climbing6:before {
+  content: "\41";
+}
+.icon-drop19:before {
+  content: "\42";
+}
+.icon-dumbbell21:before {
+  content: "\43";
+}
+.icon-finish:before {
+  content: "\44";
+}
+.icon-fishing11:before {
+  content: "\45";
+}
+.icon-floating1:before {
+  content: "\46";
+}
+.icon-guru:before {
+  content: "\47";
+}
+.icon-guru1:before {
+  content: "\48";
+}
+.icon-jump7:before {
+  content: "\49";
+}
+.icon-jumping27:before {
+  content: "\4a";
+}
+.icon-leg5:before {
+  content: "\4b";
+}
+.icon-man362:before {
+  content: "\4c";
+}
+.icon-mountain24:before {
+  content: "\4d";
+}
+.icon-padding:before {
+  content: "\4e";
+}
+.icon-ping3:before {
+  content: "\4f";
+}
+.icon-regular2:before {
+  content: "\50";
+}
+.icon-rugby98:before {
+  content: "\51";
+}
+.icon-runner5:before {
+  content: "\52";
+}
+.icon-running30:before {
+  content: "\53";
+}
+.icon-skidiving:before {
+  content: "\54";
+}
+.icon-skiing7:before {
+  content: "\55";
+}
+.icon-skydiving2:before {
+  content: "\56";
+}
+.icon-soccer43:before {
+  content: "\57";
+}
+.icon-soccer44:before {
+  content: "\58";
+}
+.icon-sport11:before {
+  content: "\59";
+}
+.icon-sportive36:before {
+  content: "\5a";
+}
+.icon-stopwatch7:before {
+  content: "\61";
+}
+.icon-swimming20:before {
+  content: "\62";
+}
+.icon-tennis18:before {
+  content: "\63";
+}
+.icon-time13:before {
+  content: "\64";
+}
+.icon-trekking:before {
+  content: "\65";
+}
+.icon-trophy45:before {
+  content: "\66";
+}
+.icon-walking17:before {
+  content: "\67";
+}
+.icon-weightlift:before {
+  content: "\68";
+}
+.icon-yoga12:before {
+  content: "\69";
+}
+.icon-barbell:before {
+  content: "\6a";
+}
+.icon-basketball35:before {
+  content: "\6b";
+}
+.icon-biceps:before {
+  content: "\6c";
+}
+.icon-canopy:before {
+  content: "\6d";
+}
+.icon-championship8:before {
+  content: "\6e";
+}

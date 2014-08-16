@@ -1,0 +1,73 @@
+<ion-view title="Prisaack 2014">
+
+	<ion-nav-buttons side="right">
+		  <button class="button button-icon icon ion-ios7-plus-empty" ng-click="modal.show()">
+		   
+		  </button>
+	</ion-nav-buttons>
+	
+  <ion-content class="has-header">
+
+  
+	
+	<div class="item item-input-inset">		
+	     <label class="item-input-wrapper">
+		    <i class="icon ion-search placeholder-icon"></i>
+		    <input type="text" placeholder="Search" ng-model="searchKey">
+		 </label>
+	</div>
+
+	<ion-list ng-repeat="event in events">
+
+	  <ion-item class="item item-icon-left item-icon-right" href="#/tab/event/{{event.$id}}">
+		  <i class="icon ion-ios7-calendar-outline"></i>
+		  	{{event.title}}
+		  	<p>{{ event.date  | date:'EEEE, MMMM d, y'}}</p>
+		  <i class="icon ion-ios7-arrow-right"></i>
+	  </ion-item>
+
+	</ion-list>
+
+
+  </ion-content>
+
+
+  <script id="modal.html" type="text/ng-template">
+
+      <div class="modal" ng-controller="ModalCtrl">
+
+      	
+
+
+        <ion-header-bar class="bar bar-header bar-positive">
+        	<button ng-click="modal.hide()" class="button button-positive button-icon ion-ios7-arrow-back"></button>
+				<h1 class="title">New Event</h1>
+
+        </ion-header-bar>
+
+        <ion-content>
+          <div class="padding">
+            <div class="list">
+
+              <label class="item item-input" ng-click="openDatePicker()">
+                <span class="input-label">Date</span>
+                <input type="text" ng-model="newEvent.formattedDate">
+              </label>
+              
+              <label class="item item-input">
+                <span class="input-label">Title</span>
+                <input ng-model="newEvent.title" type="text">
+              </label>
+
+              
+
+              
+              <button class="button button-full button-positive" ng-click="createEvent()">Create</button>
+            </div>
+          </div>
+        </ion-content>
+
+      </div>
+
+    </script>
+</ion-view>
