@@ -1,7 +1,7 @@
 <ion-view title="Prisaack 2014">
 
 	<ion-nav-buttons side="right">
-		  <button class="button button-icon icon ion-ios7-plus-empty" ng-click="modal.show()">
+		  <button class="button button-icon icon ion-ios7-plus-empty" ng-click="eventModal.show()">
 		   
 		  </button>
 	</ion-nav-buttons>
@@ -17,13 +17,18 @@
 		 </label>
 	</div>
 
-	<ion-list ng-repeat="event in events">
+	<ion-list ng-repeat="event in events" can-swipe="true">
 
 	  <ion-item class="item item-icon-left item-icon-right" href="#/tab/event/{{event.$id}}">
-		  <i class="icon ion-ios7-calendar-outline"></i>
-		  	{{event.title}}
+		  	<i class="icon ion-ios7-calendar-outline"></i>
+		  		{{event.title}}
 		  	<p>{{ event.date  | date:'EEEE, MMMM d, y'}}</p>
-		  <i class="icon ion-ios7-arrow-right"></i>
+
+		  	<i class="icon ion-ios7-arrow-right"></i>
+		  	
+		  	<ion-option-button class="button-assertive"
+				                 ng-click="events.$remove(event)">Remove
+			</ion-option-button>
 	  </ion-item>
 
 	</ion-list>
@@ -32,39 +37,34 @@
   </ion-content>
 
 
-  <script id="modal.html" type="text/ng-template">
+  	<script id="newEventModal.html" type="text/ng-template">
 
-      <div class="modal" ng-controller="ModalCtrl">
-
-      	
-
+      <div class="modal" ng-controller="EventModalCtrl">
 
         <ion-header-bar class="bar bar-header bar-positive">
-        	<button ng-click="modal.hide()" class="button button-positive button-icon ion-ios7-arrow-back"></button>
-				<h1 class="title">New Event</h1>
-
+        <button ng-click="hideEventModal()" class="button button-positive button-icon ion-ios7-arrow-back"></button>
+        <h1 class="title"></h1>
+        <button ng-click="createEvent()" class="button button-positive button-icon ion-ios7-checkmark"></button>
+				
+        
         </ion-header-bar>
 
         <ion-content>
-          <div class="padding">
+
             <div class="list">
 
-              <label class="item item-input" ng-click="openDatePicker()">
-                <span class="input-label">Date</span>
-                <input type="text" ng-model="newEvent.formattedDate">
-              </label>
-              
-              <label class="item item-input">
-                <span class="input-label">Title</span>
-                <input ng-model="newEvent.title" type="text">
-              </label>
+  			<label class="item item-input item-floating-label">
+  				<span class="input-label">Event name</span>
+                <input ng-model="newEvent.title" type="text" placeholder="Event name">
+            </label>
 
-              
+            <label class="item item-input item-floating-label" ng-click="openDatePicker()">
+            	<span class="input-label">Date</span>
+                <input type="text" ng-model="newEvent.formattedDate" placeholder="Date">
+            </label>
 
-              
-              <button class="button button-full button-positive" ng-click="createEvent()">Create</button>
             </div>
-          </div>
+
         </ion-content>
 
       </div>

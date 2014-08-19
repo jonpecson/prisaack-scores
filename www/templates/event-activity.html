@@ -1,0 +1,140 @@
+<ion-view title="Day 1- {{event.$id}}">
+
+	<ion-nav-buttons side="right">
+		  <button class="button button-icon icon ion-ios7-plus-empty" ng-click="activityModal.show()">
+		   
+		  </button>
+	</ion-nav-buttons>
+
+	<ion-content has-header="true">
+
+	<div class="item item-input-inset">		
+	     <label class="item-input-wrapper">
+		    <i class="icon ion-search placeholder-icon"></i>
+		    <input type="text" placeholder="Search" ng-model="searchKey">
+		 </label>
+	</div>
+
+
+	  <div class="list">
+
+	    <div ng-repeat="time in eventlist | groupBy:'time'">
+
+	        <div class="item item-divider">
+			    {{time}}
+			</div>
+
+	        
+
+			<a  class="item  item-icon-left item-icon-right" 
+				ng-repeat="game in games = (eventlist | filter: {time: time})">
+				
+				<i class="icon icon-basketball35"></i>
+
+				{{game.player1}} vs. {{game.player2}}
+			 	<p>{{game.sportname}}</p>
+			 	<p>{{game.location}}</p>
+
+			 	<i class="badge badge-balanced ion-trophy">&nbsp; Winner : KCC</i>
+			</a>
+
+	    
+
+	        </div>
+
+	  </div>
+
+
+
+  	</ion-content>
+
+  	<script id="newActivityModal.html" type="text/ng-template">
+
+      <div class="modal" ng-controller="ActivityModalCtrl">
+
+        <ion-header-bar class="bar bar-header bar-positive">
+        <button ng-click="hideActivityModal()" class="button button-positive button-icon ion-ios7-arrow-back"></button>
+        <h1 class="title"></h1>
+        <button ng-click="createActivity()" class="button button-positive button-icon ion-ios7-checkmark"></button>
+				
+        
+        </ion-header-bar>
+
+        <ion-content>
+
+            <div class="list">
+
+            		
+            
+            <label class="item item-input item-floating-label">
+  				<span class="input-label">Game Number</span>
+                <input ng-model="newActivity.gameNo" type="text" placeholder="Game Number">
+            </label>
+
+            <label class="item item-icon-right">
+			  <select style="opacity:0; width:100%; position:absolute; z:index=100" 
+			  		ng-model="newActivity.game" ng-options="game.gameName for game in games"></select>
+
+			  <i class="icon ion-ios7-arrow-down"></i>
+			  <span class="input-label">Game Name</span>
+			  <h2>{{newActivity.game.gameName}}</h2>
+
+			</label>
+
+            <label class="item item-input item-floating-label">
+  				<span class="input-label">Category</span>
+                <input ng-model="newActivity.category" type="text" placeholder="Category">
+            </label>
+
+            <label class="item item-icon-right">
+			  <select style="opacity:0; width:100%; position:absolute; z:index=100" 
+			  		ng-model="newActivity.team1" ng-options="school.$id for school in schoolList"></select>
+
+			  <i class="icon ion-ios7-arrow-down"></i>
+			  <span class="input-label">Team 1</span>
+			  <h2>{{newActivity.team1.name}}</h2>
+
+			</label>
+
+			<label class="item item-icon-right">
+			  <select style="opacity:0; width:100%; position:absolute; z:index=100" 
+			  		ng-model="newActivity.team2" ng-options="school.$id for school in schoolList"></select>
+
+			  <i class="icon ion-ios7-arrow-down"></i>
+			  <span class="input-label">Team 2</span>
+			  <h2>{{newActivity.team2.name}}</h2>
+
+			</label>	
+            
+
+            <label class="item item-input item-floating-label">
+  				<span class="input-label">Venue</span>
+                <input ng-model="newActivity.venue" type="text" placeholder="Venue">
+            </label>
+
+            
+            <label class="item item-input item-floating-label" ng-click="openFromTimePicker()">
+            	<span class="input-label">From</span>
+                <input type="text" ng-model="newActivity.formattedFromTime" placeholder="From">
+            </label>
+
+            <label class="item item-input item-floating-label" ng-click="openToTimePicker()">
+            	<span class="input-label">To</span>
+                <input type="text" ng-model="newActivity.formattedToTime" placeholder="To">
+            </label>
+
+  			
+
+            
+
+            </div>
+
+        </ion-content>
+
+      </div>
+
+    </script>
+
+
+
+</ion-view>

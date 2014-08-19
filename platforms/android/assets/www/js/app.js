@@ -12,10 +12,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
 
     var eventList = Prisaack.allEvents();
     var activitylist = Prisaack.allActivities();
+    var schoolList = Prisaack.allSchools();
 
     $rootScope.events = eventList;
     $rootScope.activities = activitylist;
-
+    $rootScope.schools = schoolList;
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -55,12 +56,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
         }
       }
     })
-    .state('tab.event-detail', {
+    .state('tab.event-activity', {
       url: '/event/:eventId',
       views: {
         'tab-events': {
-          templateUrl: 'templates/event-detail.html',
-          controller: 'EventDetailCtrl'
+          templateUrl: 'templates/event-activity.html',
+          controller: 'EventActivityCtrl'
         }
       }
     })

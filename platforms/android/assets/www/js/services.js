@@ -29,7 +29,7 @@ angular.module('starter.services', [])
   return {
 
     getRefFor:function(childName) {
-      return $firebase(new Firebase(FIREBASE_URL + '/Prisaack2014/').child(childName));
+      return $firebase(new Firebase(FIREBASE_URL + '/PrisaackScores/').child(childName));
     }
   };
 })
@@ -44,6 +44,11 @@ angular.module('starter.services', [])
 
     allActivities : function () {
       var list  = firebaseFactory.getRefFor('Activities').$asArray();
+      return list;
+    },
+
+    allSchools : function () {
+      var list = firebaseFactory.getRefFor('Schools').$asArray();
       return list;
     }  
   };

@@ -5,7 +5,6 @@ C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawab
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable-land-ldpi\screen.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable-land-mdpi\screen.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable-land-xhdpi\screen.png \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable-ldpi\icon.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable-mdpi\icon.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable-port-hdpi\screen.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable-port-ldpi\screen.png \
@@ -22,7 +21,6 @@ C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\ant-build\
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\ant-build\res\drawable-land-ldpi\screen.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\ant-build\res\drawable-land-mdpi\screen.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\ant-build\res\drawable-land-xhdpi\screen.png \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\ant-build\res\drawable-ldpi\icon.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\ant-build\res\drawable-mdpi\icon.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\ant-build\res\drawable-port-hdpi\screen.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\ant-build\res\drawable-port-ldpi\screen.png \
