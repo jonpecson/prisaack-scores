@@ -265,6 +265,7 @@ C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\plugins\com.ionic.keyboard\www\keyboard.js \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\plugins\org.apache.cordova.device\www \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\plugins\org.apache.cordova.device\www\device.js \
+C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\templates\activity-detail.html \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\templates\event-activity.html \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\templates\result-detail.html \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\templates\tab-about.html \

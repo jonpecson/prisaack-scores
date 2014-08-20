@@ -1,7 +1,5 @@
 angular.module('starter.controllers', [])
 
-
-
 .controller('EventsCtrl', ['$rootScope','$scope', '$ionicModal', 
     function($rootScope, $scope,$ionicModal) {
     	$ionicModal.fromTemplateUrl('newEventModal.html', function(modal) {
@@ -10,9 +8,6 @@ angular.module('starter.controllers', [])
     	    animation: 'slide-in-up',
     	    focusFirstInput: true
     	});
-
-      
-    
 }])
 
 .controller('EventActivityCtrl', ['$rootScope', '$scope','$stateParams', '$ionicModal',
@@ -20,9 +15,7 @@ angular.module('starter.controllers', [])
     function($rootScope, $scope, $stateParams,$ionicModal) {
       var key = $stateParams.eventId;
       var index = $rootScope.events.$indexFor(key);
-      $scope.event = $rootScope.events[index];
-      
-      console.log($scope.event);
+      $rootScope.event = $rootScope.events[index];
 
       $ionicModal.fromTemplateUrl('newActivityModal.html', function(modal) {
           $rootScope.activityModal = modal;
@@ -41,27 +34,37 @@ angular.module('starter.controllers', [])
           {time: '8:30 AM - 9: 30 AM', player1: 'FBC', player2: 'FC', sportname : 'Volleyball (Mens)', location: 'KCC Gym'},
           {time: '8:30 AM - 9: 30 AM', player1: 'FBC', player2: 'FC', sportname : 'Volleyball (Mens)', location: 'KCC Gym'},
       ];
-
-
-
 }])
 
-.controller('ResultsCtrl', function($scope, Friends) {
+.controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', 
+  function($rootScope, $scope, $stateParams,$ionicModal) {
+      var key = $stateParams.activityId;
+
+      var activityIndex = $rootScope.activities.$indexFor(key);
+      $rootScope.activity = $rootScope.activities[activityIndex];
+
+      $scope.addNewQuarter = function() {
+        quarterName = 'Quarter 3';
+        $rootScope.addQuarter(key,quarterName);
+      }
+      
+
+}])
+.controller('ResultsCtrl',['$scope','Friends', 
+  function($scope, Friends) {
   $scope.friends = Friends.all();
-})
+}])
 
 .controller('ResultDetailCtrl', ['$scope', '$stateParams', 'Friends',
   function($scope, $stateParams, Friends) {
     $scope.friend = Friends.get($stateParams.friendId);
-  }])
+}])
 
 .controller('AboutCtrl', ['$scope',
   function($scope) {
-
-  }])
+ }])
 
 .controller('EventModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$filter',
-
   function($rootScope,$scope, $ionicPopup, $filter) {
     
     $scope.newEvent = {};
@@ -104,93 +107,105 @@ angular.module('starter.controllers', [])
          }
        ]
       });      
-    }
-      
-    
-
+    }  
 }])
 
-.controller('ActivityModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$filter',
+.controller('ActivityModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$filter', '$firebase',
+    function($rootScope,$scope, $ionicPopup, $filter, $firebase) {
+      
+      $scope.newActivity = {};
 
-  function($rootScope,$scope, $ionicPopup, $filter) {
-    
-    $scope.newActivity = {};
+      //Games Enum
+      $scope.games = [
+        {gameName:'Basketball', icon:'icon-basketball35'},
+        {gameName:'Volleyball', icon:'ion-ios7-football-outline'},
+        {gameName:'Football', icon:'ion-ios7-football'},
+        {gameName:'Table Tennis', icon:'icon-ping3'},
+        {gameName:'Tennis', icon:'icon-tennis18'},
+        {gameName:'Swimming', icon:'icon-swimming20'}
+      ];
 
-    $scope.colors = [
-      {name:'black', shade:'dark'},
-      {name:'white', shade:'light'},
-      {name:'red', shade:'dark'},
-      {name:'blue', shade:'dark'},
-      {name:'yellow', shade:'light'}
-    ];
-    
-    $scope.$watch('newActivity.fromTime', function(unformattedFromTime){
-      $scope.newActivity.formattedFromTime = $filter('date')(unformattedFromTime, 'h:mm a');
-      console.log($scope.newActivity.formattedFromTime);
-    });
-
-    $scope.$watch('newActivity.toTime', function(unformattedToTime){
-      $scope.newActivity.formattedToTime = $filter('date')(unformattedToTime, 'h:mm a');
-      console.log($scope.newActivity.formattedToTime);
-    });
-
-    $scope.createActivity  = function() {
-      $rootScope.events.$add({
-          title: $scope.Activity .title,
-          date:  $scope.Activity .fullDate
+      $scope.schoolList = $rootScope.schools;
+      
+      $scope.$watch('newActivity.fromTime', function(unformattedFromTime){
+        $scope.newActivity.formattedFromTime = $filter('date')(unformattedFromTime, 'h:mm a');
       });
 
-      $scope.newActivity  = {};
-      $rootScope.activityModal.hide();
-    };
+      $scope.$watch('newActivity.toTime', function(unformattedToTime){
+        $scope.newActivity.formattedToTime = $filter('date')(unformattedToTime, 'h:mm a');
+      });
+      
+      $scope.hideActivityModal = function () {
+          $rootScope.activityModal.hide();
+       }
 
-    $scope.hideActivityModal = function () {
+      $scope.openFromTimePicker = function() {
+        $scope.tmp = {};
+        $scope.tmp.fromTime = $scope.newActivity.fromTime;
+        
+        var datePopup = $ionicPopup.show({
+         template: '<datetimepicker ng-model="tmp.fromTime"></datetimepicker>',
+         title: "Date",
+         scope: $scope,
+         buttons: [
+           {  text: 'Cancel' },
+           {
+              text: '<b>Save</b>',
+              type: 'button-positive',
+              onTap: function(e) {
+                  $scope.newActivity.fromTime = $scope.tmp.fromTime;
+                  console.log($scope.newActivity.fromTime);
+              }
+           }
+         ]
+        });      
+      }
+
+      $scope.openToTimePicker = function() {
+        $scope.tmp = {};
+        $scope.tmp.toTime = $scope.newActivity.toTime;
+        
+        var datePopup = $ionicPopup.show({
+         template: '<datetimepicker ng-model="tmp.toTime"></datetimepicker>',
+         title: "Date",
+         scope: $scope,
+         buttons: [
+           {  text: 'Cancel' },
+           {
+              text: '<b>Save</b>',
+              type: 'button-positive',
+              onTap: function(e) {
+                  $scope.newActivity.toTime = $scope.tmp.toTime;
+              }
+           }
+         ]
+        });      
+      }
+
+      $scope.createActivity  = function() {
+
+        var newActivity = $scope.newActivity;
+        var gameTime = newActivity.formattedFromTime + ' - ' + newActivity.formattedToTime;
+        
+        $rootScope.activities.$add({
+          eventId : $rootScope.event.$id,
+          gameNo : newActivity.gameNo,
+          gameIcon : newActivity.game.icon,
+          gameName : newActivity.game.gameName,
+          category : newActivity.category,
+          venue : newActivity.venue,
+          time : gameTime,
+          team1 : {schoolId : newActivity.team1.$id, score : 0},
+          team2 : {schoolId : newActivity.team2.$id, score : 0}
+        }).then(function(ref) {
+           var refId = ref.name();
+           var quarterName = 'Quarter 1';
+           $rootScope.addQuarter(refId,quarterName);
+        })
+
+        $scope.newActivity  = {};
         $rootScope.activityModal.hide();
       }
 
-    $scope.openFromTimePicker = function() {
-      $scope.tmp = {};
-      $scope.tmp.fromTime = $scope.newActivity.fromTime;
       
-      var datePopup = $ionicPopup.show({
-       template: '<datetimepicker ng-model="tmp.fromTime"></datetimepicker>',
-       title: "Date",
-       scope: $scope,
-       buttons: [
-         {  text: 'Cancel' },
-         {
-            text: '<b>Save</b>',
-            type: 'button-positive',
-            onTap: function(e) {
-                $scope.newActivity.fromTime = $scope.tmp.fromTime;
-                console.log($scope.newActivity.fromTime);
-            }
-         }
-       ]
-      });      
-    }
-
-    $scope.openToTimePicker = function() {
-      $scope.tmp = {};
-      $scope.tmp.toTime = $scope.newActivity.toTime;
-      
-      var datePopup = $ionicPopup.show({
-       template: '<datetimepicker ng-model="tmp.toTime"></datetimepicker>',
-       title: "Date",
-       scope: $scope,
-       buttons: [
-         {  text: 'Cancel' },
-         {
-            text: '<b>Save</b>',
-            type: 'button-positive',
-            onTap: function(e) {
-                $scope.newActivity.toTime = $scope.tmp.toTime;
-                console.log($scope.newActivity.toTime);
-            }
-         }
-       ]
-      });      
-    }
-
-
 }]);

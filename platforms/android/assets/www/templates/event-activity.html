@@ -18,7 +18,7 @@
 
 	  <div class="list">
 
-	    <div ng-repeat="time in eventlist | groupBy:'time'">
+	    <div ng-repeat="time in activities | filter : {eventId : event.$id} | groupBy:'time'">
 
 	        <div class="item item-divider">
 			    {{time}}
@@ -27,15 +27,15 @@
 	        
 
 			<a  class="item  item-icon-left item-icon-right" 
-				ng-repeat="game in games = (eventlist | filter: {time: time})">
+				ng-repeat="game in games = (activities | filter: {time: time} )" href="#/tab/activity-detail/{{game.$id}}">
 				
-				<i class="icon icon-basketball35"></i>
-
-				{{game.player1}} vs. {{game.player2}}
-			 	<p>{{game.sportname}}</p>
-			 	<p>{{game.location}}</p>
-
-			 	<i class="badge badge-balanced ion-trophy">&nbsp; Winner : KCC</i>
+				<i class="icon {{game.gameIcon}}"></i>
+				{{game.team1.schoolId}} vs. {{game.team2.schoolId}} <br/>
+				{{game.gameName}}   {{game.category}}
+			 	
+			 	<p>{{game.venue}}, Game #{{game.gameNo}}</p>
+			 	<p> </p>
+				<i class="badge badge-balanced ion-trophy" ng-show="(game.winner).length>0"> &nbsp;Winner : {{game.winner}}</i>
 			</a>
 
 	    
@@ -64,41 +64,48 @@
 
             <div class="list">
 
-
-            <label class="item item-icon-right">
-			  <select style="opacity:0; width:100%; position:absolute; z:index=100" 
-			  		ng-model="myColor" ng-options="color.name for color in colors">
-			  		<option value="">-- choose color --</option>
-			  </select>
-			  <span class="input-label">Game:</span>
-			  <span class="item-note">{{myColor.shade}}</span>
-			  <i class="icon ion-ios7-arrow-down"></i>
-			</label>
+            		
             
             <label class="item item-input item-floating-label">
   				<span class="input-label">Game Number</span>
                 <input ng-model="newActivity.gameNo" type="text" placeholder="Game Number">
             </label>
 
-            <label class="item item-input item-floating-label">
-  				<span class="input-label">Game Name</span>
-                <input ng-model="newActivity.gameName" type="text" placeholder="Game Name">
-            </label>
+            <label class="item item-icon-right">
+			  <select style="opacity:0; width:100%; position:absolute; z:index=100" 
+			  		ng-model="newActivity.game" ng-options="game.gameName for game in games"></select>
+
+			  <i class="icon ion-ios7-arrow-down"></i>
+			  <span class="input-label">Game Name</span>
+			  <h2>{{newActivity.game.gameName}}</h2>
+
+			</label>
 
             <label class="item item-input item-floating-label">
   				<span class="input-label">Category</span>
                 <input ng-model="newActivity.category" type="text" placeholder="Category">
-            </label>	
-            
-            <label class="item item-input item-floating-label">
-  				<span class="input-label">Team 1</span>
-                <input ng-model="newActivity.team1" type="text" placeholder="Team 1">
             </label>
 
-            <label class="item item-input item-floating-label">
-  				<span class="input-label">Team 2</span>
-                <input ng-model="newActivity.team2" type="text" placeholder="Team 2">
-            </label>
+            <label class="item item-icon-right">
+			  <select style="opacity:0; width:100%; position:absolute; z:index=100" 
+			  		ng-model="newActivity.team1" ng-options="school.$id for school in schoolList"></select>
+
+			  <i class="icon ion-ios7-arrow-down"></i>
+			  <span class="input-label">Team 1</span>
+			  <h2>{{newActivity.team1.name}}</h2>
+
+			</label>
+
+			<label class="item item-icon-right">
+			  <select style="opacity:0; width:100%; position:absolute; z:index=100" 
+			  		ng-model="newActivity.team2" ng-options="school.$id for school in schoolList"></select>
+
+			  <i class="icon ion-ios7-arrow-down"></i>
+			  <span class="input-label">Team 2</span>
+			  <h2>{{newActivity.team2.name}}</h2>
+
+			</label>	
+            
 
             <label class="item item-input item-floating-label">
   				<span class="input-label">Venue</span>

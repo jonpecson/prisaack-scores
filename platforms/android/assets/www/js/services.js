@@ -50,7 +50,28 @@ angular.module('starter.services', [])
     allSchools : function () {
       var list = firebaseFactory.getRefFor('Schools').$asArray();
       return list;
-    }  
+    },
+
+    allScores : function () {
+      var list = firebaseFactory.getRefFor('Scores').$asArray();
+      return list;
+    },
+ 
   };
 
-});
+})
+
+.factory('Scores',['$firebase','$rootScope',
+ function($firebase, $rootScope) {
+  return function(refId, quarterName) {
+      var res='';
+      $rootScope.scores.$add({
+            activityId: refId,
+            name : quarterName,
+            team1score : 0,
+            team2score : 0
+      });
+    
+  };
+
+}]);

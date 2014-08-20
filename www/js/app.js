@@ -13,8 +13,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
     $rootScope.events = Prisaack.allEvents();
     $rootScope.activities = Prisaack.allActivities();
     $rootScope.schools = Prisaack.allSchools();
-    $rootScope.teams = Prisaack.allTeams();
+    $rootScope.scores = Prisaack.allScores();
 
+    $rootScope.addQuarter = function(refId, quarterName) {
+          $rootScope.scores.$add({
+            activityId: refId,
+            name : quarterName,
+            team1score : 0,
+            team2score : 0
+            })
+      }
     
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -64,6 +72,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
         }
       }
     })
+    .state('tab.activity-detail', {
+      url: '/activity-detail/:activityId',
+      views: {
+        'tab-events': {
+          templateUrl: 'templates/activity-detail.html',
+          controller: 'ActivityDetailCtrl'
+        }
+      }
+    })
+
 
     .state('tab.results', {
       url: '/results',

@@ -18,7 +18,7 @@
 
 	  <div class="list">
 
-	    <div ng-repeat="time in eventlist | groupBy:'time'">
+	    <div ng-repeat="time in activities | filter : {eventId : event.$id} | groupBy:'time'">
 
 	        <div class="item item-divider">
 			    {{time}}
@@ -27,15 +27,15 @@
 	        
 
 			<a  class="item  item-icon-left item-icon-right" 
-				ng-repeat="game in games = (eventlist | filter: {time: time})">
+				ng-repeat="game in games = (activities | filter: {time: time} )" href="#/tab/activity-detail/{{game.$id}}">
 				
-				<i class="icon icon-basketball35"></i>
-
-				{{game.player1}} vs. {{game.player2}}
-			 	<p>{{game.sportname}}</p>
-			 	<p>{{game.location}}</p>
-
-			 	<i class="badge badge-balanced ion-trophy">&nbsp; Winner : KCC</i>
+				<i class="icon {{game.gameIcon}}"></i>
+				{{game.team1.schoolId}} vs. {{game.team2.schoolId}} <br/>
+				{{game.gameName}}   {{game.category}}
+			 	
+			 	<p>{{game.venue}}, Game #{{game.gameNo}}</p>
+			 	<p> </p>
+				<i class="badge badge-balanced ion-trophy" ng-show="(game.winner).length>0"> &nbsp;Winner : {{game.winner}}</i>
 			</a>
 
 	    

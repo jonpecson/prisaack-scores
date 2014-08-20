@@ -192,3 +192,25 @@
 .icon-championship8:before {
   content: "\6e";
 }
+
+
+/*--------------------------*/
+h1{
+  font-size: 60px;
+}
+.col-center {
+  /*background-color:#eeeeee;*/
+/*  border:thin gray solid;*/
+  padding-top: 30%;
+}
+
+.col {
+  text-align:center;
+  padding-bottom: 0%;
+}
+.item-divider {
+  text-align:center;
+  padding-bottom: 0%;
+}
+
+/******************/

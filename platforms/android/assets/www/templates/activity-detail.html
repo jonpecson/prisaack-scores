@@ -1,0 +1,92 @@
+<ion-view title="Day 1- {{activity.$id}}"  >
+
+	
+
+	<ion-content has-header="true">
+		<div class="button-bar">
+		  <a class="button button-block button-balanced  ion-ios7-stopwatch-outline" ng-click="addNewQuarter()"> Round</a>
+		  <a class="button button-block button-positive ion-ios7-star-outline"> Winner</a>
+		  <a class="button button-block button-energized ion-ios7-pricetag-outline"> Points</a>
+		</div>
+
+		 
+
+			<div class="list">
+				<div class="item item-divider">
+				Final Scores
+				</div>
+
+
+				<div class="row">
+
+					<div class="col">
+						<div class="list card">
+							<div class="row">
+								<div class="col">
+									<h1>{{scores[(scores.length)-1].team1score}}</h1>
+									<h3>{{activity.team1.schoolId}}</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br/>	<br/>	<br/>
+					<div class="col">
+						<div class="list card">
+							<div class="row">
+								<div class="col">
+									<h1>{{scores[(scores.length)-1].team2score}}</h1>
+									<h3>{{activity.team2.schoolId}}</h3>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+
+		<div ng-repeat="quarter in scores | filter : {activityId : activity.$id}">
+			<div class="item item-divider">
+			 {{quarter.name}}
+			</div>
+
+			<div class="row">
+
+				<div class="col">
+					<div class="list card">
+						<div class="row">
+							<div class="col">
+								<h2 ng-click="editor1Enabled=!editor1Enabled">{{quarter.team1score}}</h2>
+								
+								<div ng-show="editor1Enabled">
+									<input type="text" ng-model="quarter.team1score">
+								</div>
+
+								<h4>{{activity.team1.schoolId}}</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col">
+					<div class="list card">
+						<div class="row">
+							<div class="col">
+								<h2 ng-click="editor2Enabled=!editor2Enabled">{{quarter.team2score}}</h2>
+								
+								<div ng-show="editor2Enabled">
+									<input type="text" ng-model="quarter.team2score">
+								</div>
+								<h4>{{activity.team2.schoolId}}</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div> <br/>
+
+		</div>
+			
+		
+  	</ion-content>
+</ion-view>
