@@ -59,7 +59,7 @@
 								<h2 ng-click="editor1Enabled=!editor1Enabled">{{quarter.team1score}}</h2>
 								
 								<div ng-show="editor1Enabled">
-									<input type="text" ng-model="quarter.team1score">
+									<input type="text" ng-model="quarter.team1score" ng-change="scores.$save(quarter)">
 								</div>
 
 								<h4>{{activity.team1.schoolId}}</h4>
@@ -75,7 +75,7 @@
 								<h2 ng-click="editor2Enabled=!editor2Enabled">{{quarter.team2score}}</h2>
 								
 								<div ng-show="editor2Enabled">
-									<input type="text" ng-model="quarter.team2score">
+									<input type="text" ng-model="quarter.team2score" ng-change="scores.$save(quarter)">
 								</div>
 								<h4>{{activity.team2.schoolId}}</h4>
 							</div>
