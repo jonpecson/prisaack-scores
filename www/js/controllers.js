@@ -36,16 +36,97 @@ angular.module('starter.controllers', [])
       ];
 }])
 
-.controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', 
-  function($rootScope, $scope, $stateParams,$ionicModal) {
+.controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', '$ionicPopup', 
+  function($rootScope, $scope, $stateParams,$ionicPopup) {
       var key = $stateParams.activityId;
 
       var activityIndex = $rootScope.activities.$indexFor(key);
       $rootScope.activity = $rootScope.activities[activityIndex];
 
-      $scope.addNewQuarter = function() {
-        quarterName = 'Quarter 3';
+      $scope.addNewQuarter = function(quarterName) {
         $rootScope.addQuarter(key,quarterName);
+      }
+
+      // Called to create new event
+      $scope.newQuarter = function() {
+          $scope.newRound = {};
+
+          var myPopup = $ionicPopup.show({
+              template: '<input type="text" ng-model="newRound.title" placeholder="Quarter 1">',
+              title: 'New Round',
+              scope: $scope,
+              buttons: [
+                {  text: 'Cancel' },
+                {
+                  text: '<b>Save</b>',
+                  type: 'button-positive',
+                  onTap: function(e) {
+                      //Proceed if newRound is not null
+                      if (!$scope.newRound.title) {
+                          //don't allow the user to close unless he enters event name
+                          e.preventDefault();
+                        } else {
+                          return $scope.newRound;
+                        }
+                      }
+                }
+              ]
+          }); 
+          myPopup.then(function(res) {
+            if (res) {
+                $scope.addNewQuarter(res.title);
+            };
+             
+          });
+           
+      };
+      $scope.editScore1 = function(quarter) {
+        $scope.editQuarter = quarter;
+        var myPopup = $ionicPopup.show({
+              template: '<input type="text" ng-model="editQuarter.team1score" placeholder="1">',
+              title: 'New Round',
+              scope: $scope,
+              buttons: [
+                {  text: 'Cancel' },
+                {
+                  text: '<b>Save</b>',
+                  type: 'button-positive',
+                  onTap: function(e) {
+                      //Proceed if newRound is not null
+                      if (!$scope.editQuarter) {
+                          //don't allow the user to close unless he enters event name
+                          e.preventDefault();
+                        } else {
+                          $rootScope.scores.$save($scope.editQuarter);
+                        }
+                      }
+                }
+              ]
+          }); 
+      }
+      $scope.editScore2 = function(quarter) {
+        $scope.editQuarter = quarter;
+        var myPopup = $ionicPopup.show({
+              template: '<input type="text" ng-model="editQuarter.team2score" placeholder="1">',
+              title: 'New Round',
+              scope: $scope,
+              buttons: [
+                {  text: 'Cancel' },
+                {
+                  text: '<b>Save</b>',
+                  type: 'button-positive',
+                  onTap: function(e) {
+                      //Proceed if newRound is not null
+                      if (!$scope.editQuarter) {
+                          //don't allow the user to close unless he enters event name
+                          e.preventDefault();
+                        } else {
+                          $rootScope.scores.$save($scope.editQuarter);
+                        }
+                      }
+                }
+              ]
+          }); 
       }
       
 
