@@ -37,37 +37,5 @@
   </ion-content>
 
 
-  	<script id="newEventModal.html" type="text/ng-template">
-
-      <div class="modal" ng-controller="EventModalCtrl">
-
-        <ion-header-bar class="bar bar-header bar-positive">
-        <button ng-click="hideEventModal()" class="button button-positive button-icon ion-ios7-arrow-back"></button>
-        <h1 class="title"></h1>
-        <button ng-click="createEvent()" class="button button-positive button-icon ion-ios7-checkmark"></button>
-				
-        
-        </ion-header-bar>
-
-        <ion-content>
-
-            <div class="list">
-
-  			<label class="item item-input item-floating-label">
-  				<span class="input-label">Event name</span>
-                <input ng-model="newEvent.title" type="text" placeholder="Event name">
-            </label>
-
-            <label class="item item-input item-floating-label" ng-click="openDatePicker()">
-            	<span class="input-label">Date</span>
-                <input type="text" ng-model="newEvent.formattedDate" placeholder="Date">
-            </label>
-
-            </div>
-
-        </ion-content>
-
-      </div>
-
-    </script>
+  	
 </ion-view>

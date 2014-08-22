@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('EventsCtrl', ['$rootScope','$scope', '$ionicModal', 
     function($rootScope, $scope,$ionicModal) {
-    	$ionicModal.fromTemplateUrl('newEventModal.html', function(modal) {
+    	$ionicModal.fromTemplateUrl('templates/modals/new-event-modal.html', function(modal) {
     	    $rootScope.eventModal = modal;
     	}, {
     	    animation: 'slide-in-up',
@@ -17,7 +17,7 @@ angular.module('starter.controllers', [])
       var index = $rootScope.events.$indexFor(key);
       $rootScope.event = $rootScope.events[index];
 
-      $ionicModal.fromTemplateUrl('newActivityModal.html', function(modal) {
+      $ionicModal.fromTemplateUrl('templates/modals/new-activity-modal.html', function(modal) {
           $rootScope.activityModal = modal;
       }, {
           animation: 'slide-in-up',
@@ -36,12 +36,26 @@ angular.module('starter.controllers', [])
       ];
 }])
 
-.controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', '$ionicPopup', 
-  function($rootScope, $scope, $stateParams,$ionicPopup) {
+.controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', '$ionicPopup', '$ionicModal',
+  function($rootScope, $scope, $stateParams,$ionicPopup,$ionicModal) {
       var key = $stateParams.activityId;
 
       var activityIndex = $rootScope.activities.$indexFor(key);
       $rootScope.activity = $rootScope.activities[activityIndex];
+
+      $ionicModal.fromTemplateUrl('templates/modals/add-winner-modal.html', function(modal) {
+          $rootScope.pickWinner = modal;
+      }, {
+          animation: 'slide-in-up',
+          focusFirstInput: true
+      })
+
+      $ionicModal.fromTemplateUrl('templates/modals/add-point-modal.html', function(modal) {
+          $rootScope.rewardPoints = modal;
+      }, {
+          animation: 'slide-in-up',
+          focusFirstInput: true
+      })
 
       $scope.addNewQuarter = function(quarterName) {
         $rootScope.addQuarter(key,quarterName);
@@ -52,7 +66,7 @@ angular.module('starter.controllers', [])
           $scope.newRound = {};
 
           var myPopup = $ionicPopup.show({
-              template: '<input type="text" ng-model="newRound.title" placeholder="Quarter 1">',
+              template: '<input type="text" ng-model="newRound.title" placeholder="1st Quarter">',
               title: 'New Round',
               scope: $scope,
               buttons: [
@@ -77,9 +91,16 @@ angular.module('starter.controllers', [])
                 $scope.addNewQuarter(res.title);
             };
              
-          });
-           
-      };
+          });       
+      }
+
+      $scope.showWinnerModal = function() {
+        $rootScope.pickWinner.show();
+      }
+      $scope.showPointsModal = function() {
+        $rootScope.rewardPoints.show();
+      }
+
       $scope.editScore1 = function(quarter) {
         $scope.editQuarter = quarter;
         var myPopup = $ionicPopup.show({
@@ -104,6 +125,7 @@ angular.module('starter.controllers', [])
               ]
           }); 
       }
+
       $scope.editScore2 = function(quarter) {
         $scope.editQuarter = quarter;
         var myPopup = $ionicPopup.show({
@@ -128,7 +150,8 @@ angular.module('starter.controllers', [])
               ]
           }); 
       }
-      
+
+
 
 }])
 .controller('ResultsCtrl',['$scope','Friends', 
@@ -145,6 +168,8 @@ angular.module('starter.controllers', [])
   function($scope) {
  }])
 
+
+// Modals
 .controller('EventModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$filter',
   function($rootScope,$scope, $ionicPopup, $filter) {
     
@@ -190,7 +215,6 @@ angular.module('starter.controllers', [])
       });      
     }  
 }])
-
 .controller('ActivityModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$filter', '$firebase',
     function($rootScope,$scope, $ionicPopup, $filter, $firebase) {
       
@@ -276,17 +300,50 @@ angular.module('starter.controllers', [])
           category : newActivity.category,
           venue : newActivity.venue,
           time : gameTime,
-          team1 : {schoolId : newActivity.team1.$id, score : 0},
-          team2 : {schoolId : newActivity.team2.$id, score : 0}
+          points : newActivity.points,
+          teams : {    
+            team1 : {schoolId : newActivity.team1.$id, score : 0},
+            team2 : {schoolId : newActivity.team2.$id, score : 0}
+          }
         }).then(function(ref) {
            var refId = ref.name();
-           var quarterName = 'Quarter 1';
+           var quarterName = '1st Quarter';
            $rootScope.addQuarter(refId,quarterName);
         })
 
         $scope.newActivity  = {};
         $rootScope.activityModal.hide();
       }
+}])
+.controller('WinnerModalCtrl', ['$rootScope', '$scope', '$firebase',
+  function($rootScope,$scope,$firebase){
 
-      
+    $scope.teams = $rootScope.activity.teams;
+
+    $scope.hideWinnerModal = function() {
+        $rootScope.pickWinner.hide();
+    }
+
+    $scope.declareWinner = function(team) {
+        console.log(team);
+        $rootScope.activity.winner = team;
+
+        $rootScope.activities.$save($rootScope.activity);
+        $rootScope.pickWinner.hide();
+    }
+}])
+.controller('PointsModalCtrl', ['$rootScope', '$scope',
+  function($rootScope,$scope){
+
+    $scope.teams = $rootScope.activity.teams;
+
+    $scope.hidePointsModal = function() {
+        $rootScope.rewardPoints.hide();
+    }
+
+    $scope.addPoints= function(team) {
+        console.log(team);
+        $rootScope.rewardPoints.hide();
+    }
 }]);
+
