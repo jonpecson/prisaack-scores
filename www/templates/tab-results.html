@@ -1,8 +1,16 @@
-<ion-view title="Result">
+<ion-view title="Results">
   <ion-content class="has-header">
     <ion-list>
-      <ion-item ng-repeat="friend in friends" type="item-text-wrap" href="#/tab/result/{{friend.id}}">
-        {{friend.name}}
+      <ion-item ng-repeat="school in schools" 
+      			type="item-text-wrap" 
+      			href="#/tab/result/{{school.$id}}"
+      			class="item item-icon-left">
+      			<i class="icon ion-ios7-people"></i>
+
+        {{school.$id}}
+        <span class="badge badge-balanced">100</span>
+        <p>{{school.name}}</p>
+        
       </ion-item>
     </ion-list>
   </ion-content>

@@ -93,7 +93,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
       }
     })
     .state('tab.result-detail', {
-      url: '/result/:friendId',
+      url: '/result/:schoolId',
       views: {
         'tab-results': {
           templateUrl: 'templates/result-detail.html',

@@ -14,8 +14,7 @@ angular.module('starter.controllers', [])
 
     function($rootScope, $scope, $stateParams,$ionicModal) {
       var key = $stateParams.eventId;
-      var index = $rootScope.events.$indexFor(key);
-      $rootScope.event = $rootScope.events[index];
+      $rootScope.event = $rootScope.events.$getRecord(key);
 
       $ionicModal.fromTemplateUrl('templates/modals/new-activity-modal.html', function(modal) {
           $rootScope.activityModal = modal;
@@ -39,9 +38,7 @@ angular.module('starter.controllers', [])
 .controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', '$ionicPopup', '$ionicModal',
   function($rootScope, $scope, $stateParams,$ionicPopup,$ionicModal) {
       var key = $stateParams.activityId;
-
-      var activityIndex = $rootScope.activities.$indexFor(key);
-      $rootScope.activity = $rootScope.activities[activityIndex];
+      $rootScope.activity = $rootScope.activities.$getRecord(key);
 
       $ionicModal.fromTemplateUrl('templates/modals/add-winner-modal.html', function(modal) {
           $rootScope.pickWinner = modal;
@@ -159,9 +156,10 @@ angular.module('starter.controllers', [])
   $scope.friends = Friends.all();
 }])
 
-.controller('ResultDetailCtrl', ['$scope', '$stateParams', 'Friends',
-  function($scope, $stateParams, Friends) {
-    $scope.friend = Friends.get($stateParams.friendId);
+.controller('ResultDetailCtrl', ['$rootScope','$scope', '$stateParams', 'Friends',
+  function($rootScope,$scope, $stateParams, Friends) {
+    var key = $stateParams.schoolId;
+    $rootScope.school = $rootScope.schools.$getRecord(key);
 }])
 
 .controller('AboutCtrl', ['$scope',

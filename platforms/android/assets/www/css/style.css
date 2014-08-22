@@ -208,9 +208,113 @@ h1{
   text-align:center;
   padding-bottom: 0%;
 }
-.item-divider {
+.align-center {
   text-align:center;
   padding-bottom: 0%;
 }
 
 /******************/
+
+.bg-fbc{
+  background: url('../img/6.jpg') no-repeat transparent;
+}
+.bg-kcc{
+  background: url('../img/3.jpg') no-repeat transparent;
+}
+.bg-fc{
+  background: url('../img/5.jpg') no-repeat transparent;
+}
+.bg-tacea{
+  background: url('../img/1.jpg') no-repeat transparent;
+}
+
+
+#profile-bg {
+  -repeat center;
+        position: absolute;
+        left: 0;
+        top: 0px;
+        width: 100%;
+        height: 250px;
+        /*background:  url('/img/cubes.png');*/
+        /*background: url('/img/04.jpg') no-repeat transparent;*/
+        /*background-size: 100%;*/
+        background-position: 50% 20%;
+        background-size: cover;
+    
+        text-align: center;
+
+
+      }
+
+      #content {
+        position: relative;
+        margin-top: 150px;
+        background-color: white;
+        box-shadow: 0px -1px 10px rgba(0,0,0,0.4);
+        padding-top: 200px;
+      }
+
+      #profile-info {
+        position: absolute;
+        top: -90px;
+        width: 100%;
+        z-index: 2;
+        text-align: center;
+      }
+      #profile-name {
+        color: #444;
+        font-size: 26px;
+      }
+      #profile-description {
+        font-size: 15px;
+        color: #888;
+      }
+      #profile-description a {
+        color: #888;
+      }
+
+      #profile-image {
+        display: block;
+        border-radius: 100px;
+        border: 1px solid #fff;
+        width: 128px;
+        height: 128px;
+        margin: 30px auto 0;
+        box-shadow: 0px 0px 4px rgba(0,0,0,0.7);
+      }
+
+      .list-item-content {
+        padding: 5px;
+      }
+
+      .list-item {
+        color: #666666;
+      }
+
+      .post {
+        color: #444;
+      }
+
+      .post-time {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        font-size: 11px;
+        color: #888;
+      }
+
+      .post-profile-image {
+        display: inline-block;
+        vertical-align: top;
+        width: 48px;
+        height: 48px;
+        margin-right: 10px;
+      }
+      .post-options {
+        position: absolute;
+        font-size: 16px;
+        right: 5px;
+        bottom: 5px;
+        color: #888;
+      }

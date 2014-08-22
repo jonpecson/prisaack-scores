@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('EventsCtrl', ['$rootScope','$scope', '$ionicModal', 
     function($rootScope, $scope,$ionicModal) {
-    	$ionicModal.fromTemplateUrl('newEventModal.html', function(modal) {
+    	$ionicModal.fromTemplateUrl('templates/modals/new-event-modal.html', function(modal) {
     	    $rootScope.eventModal = modal;
     	}, {
     	    animation: 'slide-in-up',
@@ -14,10 +14,9 @@ angular.module('starter.controllers', [])
 
     function($rootScope, $scope, $stateParams,$ionicModal) {
       var key = $stateParams.eventId;
-      var index = $rootScope.events.$indexFor(key);
-      $rootScope.event = $rootScope.events[index];
+      $rootScope.event = $rootScope.events.$getRecord(key);
 
-      $ionicModal.fromTemplateUrl('newActivityModal.html', function(modal) {
+      $ionicModal.fromTemplateUrl('templates/modals/new-activity-modal.html', function(modal) {
           $rootScope.activityModal = modal;
       }, {
           animation: 'slide-in-up',
@@ -36,18 +35,120 @@ angular.module('starter.controllers', [])
       ];
 }])
 
-.controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', 
-  function($rootScope, $scope, $stateParams,$ionicModal) {
+.controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', '$ionicPopup', '$ionicModal',
+  function($rootScope, $scope, $stateParams,$ionicPopup,$ionicModal) {
       var key = $stateParams.activityId;
+      $rootScope.activity = $rootScope.activities.$getRecord(key);
 
-      var activityIndex = $rootScope.activities.$indexFor(key);
-      $rootScope.activity = $rootScope.activities[activityIndex];
+      $ionicModal.fromTemplateUrl('templates/modals/add-winner-modal.html', function(modal) {
+          $rootScope.pickWinner = modal;
+      }, {
+          animation: 'slide-in-up',
+          focusFirstInput: true
+      })
 
-      $scope.addNewQuarter = function() {
-        quarterName = 'Quarter 3';
+      $ionicModal.fromTemplateUrl('templates/modals/add-point-modal.html', function(modal) {
+          $rootScope.rewardPoints = modal;
+      }, {
+          animation: 'slide-in-up',
+          focusFirstInput: true
+      })
+
+      $scope.addNewQuarter = function(quarterName) {
         $rootScope.addQuarter(key,quarterName);
       }
-      
+
+      // Called to create new event
+      $scope.newQuarter = function() {
+          $scope.newRound = {};
+
+          var myPopup = $ionicPopup.show({
+              template: '<input type="text" ng-model="newRound.title" placeholder="1st Quarter">',
+              title: 'New Round',
+              scope: $scope,
+              buttons: [
+                {  text: 'Cancel' },
+                {
+                  text: '<b>Save</b>',
+                  type: 'button-positive',
+                  onTap: function(e) {
+                      //Proceed if newRound is not null
+                      if (!$scope.newRound.title) {
+                          //don't allow the user to close unless he enters event name
+                          e.preventDefault();
+                        } else {
+                          return $scope.newRound;
+                        }
+                      }
+                }
+              ]
+          }); 
+          myPopup.then(function(res) {
+            if (res) {
+                $scope.addNewQuarter(res.title);
+            };
+             
+          });       
+      }
+
+      $scope.showWinnerModal = function() {
+        $rootScope.pickWinner.show();
+      }
+      $scope.showPointsModal = function() {
+        $rootScope.rewardPoints.show();
+      }
+
+      $scope.editScore1 = function(quarter) {
+        $scope.editQuarter = quarter;
+        var myPopup = $ionicPopup.show({
+              template: '<input type="text" ng-model="editQuarter.team1score" placeholder="1">',
+              title: 'New Round',
+              scope: $scope,
+              buttons: [
+                {  text: 'Cancel' },
+                {
+                  text: '<b>Save</b>',
+                  type: 'button-positive',
+                  onTap: function(e) {
+                      //Proceed if newRound is not null
+                      if (!$scope.editQuarter) {
+                          //don't allow the user to close unless he enters event name
+                          e.preventDefault();
+                        } else {
+                          $rootScope.scores.$save($scope.editQuarter);
+                        }
+                      }
+                }
+              ]
+          }); 
+      }
+
+      $scope.editScore2 = function(quarter) {
+        $scope.editQuarter = quarter;
+        var myPopup = $ionicPopup.show({
+              template: '<input type="text" ng-model="editQuarter.team2score" placeholder="1">',
+              title: 'New Round',
+              scope: $scope,
+              buttons: [
+                {  text: 'Cancel' },
+                {
+                  text: '<b>Save</b>',
+                  type: 'button-positive',
+                  onTap: function(e) {
+                      //Proceed if newRound is not null
+                      if (!$scope.editQuarter) {
+                          //don't allow the user to close unless he enters event name
+                          e.preventDefault();
+                        } else {
+                          $rootScope.scores.$save($scope.editQuarter);
+                        }
+                      }
+                }
+              ]
+          }); 
+      }
+
+
 
 }])
 .controller('ResultsCtrl',['$scope','Friends', 
@@ -55,15 +156,18 @@ angular.module('starter.controllers', [])
   $scope.friends = Friends.all();
 }])
 
-.controller('ResultDetailCtrl', ['$scope', '$stateParams', 'Friends',
-  function($scope, $stateParams, Friends) {
-    $scope.friend = Friends.get($stateParams.friendId);
+.controller('ResultDetailCtrl', ['$rootScope','$scope', '$stateParams', 'Friends',
+  function($rootScope,$scope, $stateParams, Friends) {
+    var key = $stateParams.schoolId;
+    $rootScope.school = $rootScope.schools.$getRecord(key);
 }])
 
 .controller('AboutCtrl', ['$scope',
   function($scope) {
  }])
 
+
+// Modals
 .controller('EventModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$filter',
   function($rootScope,$scope, $ionicPopup, $filter) {
     
@@ -109,7 +213,6 @@ angular.module('starter.controllers', [])
       });      
     }  
 }])
-
 .controller('ActivityModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$filter', '$firebase',
     function($rootScope,$scope, $ionicPopup, $filter, $firebase) {
       
@@ -195,17 +298,50 @@ angular.module('starter.controllers', [])
           category : newActivity.category,
           venue : newActivity.venue,
           time : gameTime,
-          team1 : {schoolId : newActivity.team1.$id, score : 0},
-          team2 : {schoolId : newActivity.team2.$id, score : 0}
+          points : newActivity.points,
+          teams : {    
+            team1 : {schoolId : newActivity.team1.$id, score : 0},
+            team2 : {schoolId : newActivity.team2.$id, score : 0}
+          }
         }).then(function(ref) {
            var refId = ref.name();
-           var quarterName = 'Quarter 1';
+           var quarterName = '1st Quarter';
            $rootScope.addQuarter(refId,quarterName);
         })
 
         $scope.newActivity  = {};
         $rootScope.activityModal.hide();
       }
+}])
+.controller('WinnerModalCtrl', ['$rootScope', '$scope', '$firebase',
+  function($rootScope,$scope,$firebase){
 
-      
+    $scope.teams = $rootScope.activity.teams;
+
+    $scope.hideWinnerModal = function() {
+        $rootScope.pickWinner.hide();
+    }
+
+    $scope.declareWinner = function(team) {
+        console.log(team);
+        $rootScope.activity.winner = team;
+
+        $rootScope.activities.$save($rootScope.activity);
+        $rootScope.pickWinner.hide();
+    }
+}])
+.controller('PointsModalCtrl', ['$rootScope', '$scope',
+  function($rootScope,$scope){
+
+    $scope.teams = $rootScope.activity.teams;
+
+    $scope.hidePointsModal = function() {
+        $rootScope.rewardPoints.hide();
+    }
+
+    $scope.addPoints= function(team) {
+        console.log(team);
+        $rootScope.rewardPoints.hide();
+    }
 }]);
+

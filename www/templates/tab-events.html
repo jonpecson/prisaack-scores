@@ -19,12 +19,16 @@
 
 	<ion-list ng-repeat="event in events" can-swipe="true">
 
+		
+
 	  <ion-item class="item item-icon-left item-icon-right" href="#/tab/event/{{event.$id}}">
 		  	<i class="icon ion-ios7-calendar-outline"></i>
 		  		{{event.title}}
 		  	<p>{{ event.date  | date:'EEEE, MMMM d, y'}}</p>
-
 		  	<i class="icon ion-ios7-arrow-right"></i>
+			
+		  	
+
 		  	
 		  	<ion-option-button class="button-assertive"
 				                 ng-click="events.$remove(event)">Remove

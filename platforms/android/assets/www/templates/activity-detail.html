@@ -3,50 +3,58 @@
 	
 
 	<ion-content has-header="true">
-		<div class="button-bar">
-		  <a class="button button-block button-balanced  ion-ios7-stopwatch-outline" ng-click="addNewQuarter()"> Round</a>
-		  <a class="button button-block button-positive ion-ios7-star-outline"> Winner</a>
-		  <a class="button button-block button-energized ion-ios7-pricetag-outline"> Points</a>
+		<div class="button-bar" ng-show="true">
+		  <a class="button button-block button-balanced  ion-ios7-stopwatch-outline" ng-click="newQuarter()"> Round</a>
+		  <a class="button button-block button-positive ion-ios7-star-outline" ng-click="showWinnerModal()"> Winner</a>
+		  <a class="button button-block button-energized ion-ios7-pricetag-outline" ng-click="showPointsModal()"> Champion</a>
 		</div>
 
 		 
 
 			<div class="list">
-				<div class="item item-divider">
-				Final Scores
+
+			
+
+				<div class="item item-divider align-center">
+				Final Score
 				</div>
 
+				<div ng-repeat="quarter in scores | filter : {activityId : activity.$id}">
+				<div ng-show="$last">
+					<div class="row">
 
-				<div class="row">
-
-					<div class="col">
-						<div class="list card">
-							<div class="row">
-								<div class="col">
-									<h1>{{scores[(scores.length)-1].team1score}}</h1>
-									<h3>{{activity.team1.schoolId}}</h3>
+						<div class="col">
+							<div class="list card">
+								<div class="row">
+									<div class="col">
+										<h1>{{quarter.team1score}}</h1>
+										<h3>{{activity.teams.team1.schoolId}}</h3>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<br/>	<br/>	<br/>
-					<div class="col">
-						<div class="list card">
-							<div class="row">
-								<div class="col">
-									<h1>{{scores[(scores.length)-1].team2score}}</h1>
-									<h3>{{activity.team2.schoolId}}</h3>
+						<br/>	<br/>	<br/>
+						<div class="col">
+							<div class="list card">
+								<div class="row">
+									<div class="col">
+										<h1>{{quarter.team2score}}</h1>
+										<h3>{{activity.teams.team2.schoolId}}</h3>
+									</div>
 								</div>
 							</div>
 						</div>
+						
 					</div>
-					
+
+				</div>	
 				</div>
+
 			</div>
 
 
 		<div ng-repeat="quarter in scores | filter : {activityId : activity.$id}">
-			<div class="item item-divider">
+			<div class="item item-divider align-center">
 			 {{quarter.name}}
 			</div>
 
@@ -56,13 +64,9 @@
 					<div class="list card">
 						<div class="row">
 							<div class="col">
-								<h2 ng-click="editor1Enabled=!editor1Enabled">{{quarter.team1score}}</h2>
-								
-								<div ng-show="editor1Enabled">
-									<input type="text" ng-model="quarter.team1score" ng-change="scores.$save(quarter)">
-								</div>
-
-								<h4>{{activity.team1.schoolId}}</h4>
+								<h2>{{quarter.team1score}}</h2>
+								<button class="button button-small button-balanced ion-edit" ng-show="true" ng-click="editScore1(quarter)">  Edit</button>
+								<h4>{{activity.teams.team1.schoolId}}</h4>
 							</div>
 						</div>
 					</div>
@@ -72,12 +76,9 @@
 					<div class="list card">
 						<div class="row">
 							<div class="col">
-								<h2 ng-click="editor2Enabled=!editor2Enabled">{{quarter.team2score}}</h2>
-								
-								<div ng-show="editor2Enabled">
-									<input type="text" ng-model="quarter.team2score" ng-change="scores.$save(quarter)">
-								</div>
-								<h4>{{activity.team2.schoolId}}</h4>
+								<h2>{{quarter.team2score}}</h2>
+								<button class="button button-small button-balanced ion-edit" ng-show="true" ng-click="editScore2(quarter)">  Edit</button>
+								<h4>{{activity.teams.team2.schoolId}}</h4>
 							</div>
 						</div>
 					</div>
@@ -89,4 +90,7 @@
 			
 		
   	</ion-content>
+
+
+  	
 </ion-view>

@@ -28,7 +28,7 @@
 								<div class="row">
 									<div class="col">
 										<h1>{{quarter.team1score}}</h1>
-										<h3>{{activity.team1.schoolId}}</h3>
+										<h3>{{activity.teams.team1.schoolId}}</h3>
 									</div>
 								</div>
 							</div>
@@ -39,7 +39,7 @@
 								<div class="row">
 									<div class="col">
 										<h1>{{quarter.team2score}}</h1>
-										<h3>{{activity.team2.schoolId}}</h3>
+										<h3>{{activity.teams.team2.schoolId}}</h3>
 									</div>
 								</div>
 							</div>
@@ -66,7 +66,7 @@
 							<div class="col">
 								<h2>{{quarter.team1score}}</h2>
 								<button class="button button-small button-balanced ion-edit" ng-show="true" ng-click="editScore1(quarter)">  Edit</button>
-								<h4>{{activity.team1.schoolId}}</h4>
+								<h4>{{activity.teams.team1.schoolId}}</h4>
 							</div>
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 							<div class="col">
 								<h2>{{quarter.team2score}}</h2>
 								<button class="button button-small button-balanced ion-edit" ng-show="true" ng-click="editScore2(quarter)">  Edit</button>
-								<h4>{{activity.team2.schoolId}}</h4>
+								<h4>{{activity.teams.team2.schoolId}}</h4>
 							</div>
 						</div>
 					</div>
