@@ -4,9 +4,9 @@
 
 	<ion-content has-header="true">
 		<div class="button-bar" ng-show="true">
-		  <a class="button button-block button-balanced  ion-ios7-stopwatch-outline" ng-click="newQuarter()"> Round</a>
-		  <a class="button button-block button-positive ion-ios7-star-outline" ng-click="showWinnerModal()"> Winner</a>
-		  <a class="button button-block button-energized ion-ios7-pricetag-outline" ng-click="showPointsModal()"> Champion</a>
+		  <a class="button button-clear   button-positive ion-ios7-stopwatch" ng-click="newQuarter()"> Round</a>
+		  <a class="button button-clear   button-positive ion-ios7-heart" ng-click="showWinnerModal()"> Winner</a>
+		  <a class="button button-clear   button-positive ion-ios7-star" ng-click="showPointsModal()"> Points</a>
 		</div>
 
 		 
@@ -65,7 +65,7 @@
 						<div class="row">
 							<div class="col">
 								<h2>{{quarter.team1score}}</h2>
-								<button class="button button-small button-balanced ion-edit" ng-show="true" ng-click="editScore1(quarter)">  Edit</button>
+								<button class="button button-small button-light ion-edit" ng-show="true" ng-click="editScore1(quarter)">  Edit</button>
 								<h4>{{activity.teams.team1.schoolId}}</h4>
 							</div>
 						</div>
@@ -77,7 +77,7 @@
 						<div class="row">
 							<div class="col">
 								<h2>{{quarter.team2score}}</h2>
-								<button class="button button-small button-balanced ion-edit" ng-show="true" ng-click="editScore2(quarter)">  Edit</button>
+								<button class="button button-small button-light ion-edit" ng-show="true" ng-click="editScore2(quarter)">  Edit</button>
 								<h4>{{activity.teams.team2.schoolId}}</h4>
 							</div>
 						</div>

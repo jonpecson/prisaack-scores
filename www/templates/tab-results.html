@@ -6,12 +6,17 @@
       			href="#/tab/result/{{school.$id}}"
       			class="item item-icon-left">
       			<i class="icon ion-ios7-people"></i>
-
         {{school.$id}}
-        <span class="badge badge-balanced">100</span>
         <p>{{school.name}}</p>
-        
+
+        <span ng-class="getClass((points | filter:{schoolId:school.$id}).length)">
+            {{getScore((points | filter:{schoolId:school.$id}))}} Pts
+        </span>
       </ion-item>
+
+
+
+
     </ion-list>
   </ion-content>
 </ion-view>

@@ -56,22 +56,12 @@ angular.module('starter.services', [])
       var list = firebaseFactory.getRefFor('Scores').$asArray();
       return list;
     },
+
+    allPoints : function () {
+      var list = firebaseFactory.getRefFor('Points').$asArray();
+      return list;
+    },
  
   };
 
 })
-
-.factory('Scores',['$firebase','$rootScope',
- function($firebase, $rootScope) {
-  return function(refId, quarterName) {
-      var res='';
-      $rootScope.scores.$add({
-            activityId: refId,
-            name : quarterName,
-            team1score : 0,
-            team2score : 0
-      });
-    
-  };
-
-}]);

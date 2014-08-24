@@ -14,6 +14,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
     $rootScope.activities = Prisaack.allActivities();
     $rootScope.schools = Prisaack.allSchools();
     $rootScope.scores = Prisaack.allScores();
+    $rootScope.points = Prisaack.allPoints();
 
     $rootScope.addQuarter = function(refId, quarterName) {
           $rootScope.scores.$add({

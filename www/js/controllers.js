@@ -149,17 +149,63 @@ angular.module('starter.controllers', [])
       }
 
 
-
 }])
-.controller('ResultsCtrl',['$scope','Friends', 
-  function($scope, Friends) {
-  $scope.friends = Friends.all();
+.controller('ResultsCtrl',['$scope', '$rootScope',
+  function($scope,$rootScope) {
+    
+
+    $scope.getClass = function(x) {
+      if (x> 0) {
+        return "badge badge-balanced";
+      } else {
+        return "badge badge-energized";
+      }
+    };
+
+    $scope.getScore = function(schoolPts) {
+      var totalNumber = 0;
+      for(i=0; i<schoolPts.length; i++){
+      totalNumber = totalNumber + Number(schoolPts[i].points);
+      }
+      return totalNumber;
+    }
+
 }])
 
 .controller('ResultDetailCtrl', ['$rootScope','$scope', '$stateParams', 'Friends',
   function($rootScope,$scope, $stateParams, Friends) {
     var key = $stateParams.schoolId;
     $rootScope.school = $rootScope.schools.$getRecord(key);
+
+    $scope.getGameName = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.gameName;
+    }
+
+    $scope.getTeams = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.teams.team1.schoolId + ' vs. ' + activityRef.teams.team2.schoolId;
+    }
+
+    $scope.getIcon = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.gameIcon;
+    }
+    
+    $scope.getCategory = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.category;
+    }
+
+    $scope.getVenue = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.venue;
+    }
+
+    $scope.getGameNo = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return 'Game # ' + activityRef.gameNo;
+    }
 }])
 
 .controller('AboutCtrl', ['$scope',
@@ -313,8 +359,8 @@ angular.module('starter.controllers', [])
         $rootScope.activityModal.hide();
       }
 }])
-.controller('WinnerModalCtrl', ['$rootScope', '$scope', '$firebase',
-  function($rootScope,$scope,$firebase){
+.controller('WinnerModalCtrl', ['$rootScope', '$scope',
+  function($rootScope,$scope){
 
     $scope.teams = $rootScope.activity.teams;
 
@@ -330,18 +376,63 @@ angular.module('starter.controllers', [])
         $rootScope.pickWinner.hide();
     }
 }])
-.controller('PointsModalCtrl', ['$rootScope', '$scope',
-  function($rootScope,$scope){
+.controller('PointsModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$firebase',
+  function($rootScope,$scope,$ionicPopup, $firebase){
 
     $scope.teams = $rootScope.activity.teams;
+    $rootScope.team = {};
 
     $scope.hidePointsModal = function() {
         $rootScope.rewardPoints.hide();
     }
 
-    $scope.addPoints= function(team) {
-        console.log(team);
+    $scope.addPoints= function(res) {
+        var point = res;
+        $rootScope.points.$add({
+          activityId : point.activityId,
+          schoolId : point.schoolId, 
+          points : point.points 
+        });
+        console.log(point);
         $rootScope.rewardPoints.hide();
     }
+
+    // Called to create new event
+    $scope.showPoints = function(schoolId) {
+          $scope.tmp = {};
+          $scope.tmp.points = $rootScope.team.points;
+          var myPopup = $ionicPopup.show({
+              template: '<input type="text" ng-model="tmp.points" placeholder="10">',
+              title: 'Specify points',
+              scope: $scope,
+              buttons: [
+                {  text: 'Cancel' },
+                {
+                  text: '<b>Save</b>',
+                  type: 'button-positive',
+                  onTap: function(e) {
+                      //Proceed if newRound is not null
+                      if (!$scope.tmp.points) {
+                          //don't allow the user to close unless he enters event name
+                          e.preventDefault();
+                        } else {
+                           $rootScope.team.points = $scope.tmp.points;
+                           $rootScope.team.schoolId = schoolId;
+                           $rootScope.team.activityId = $rootScope.activity.$id;
+                           return $rootScope.team;
+                        }
+                      }
+                }
+              ]
+          }); 
+          myPopup.then(function(res) {
+            if (res) {
+                $scope.addPoints(res);
+            };
+             
+          });       
+      }
+
+
 }]);
 
