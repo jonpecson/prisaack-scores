@@ -1,8 +1,8 @@
-<ion-view title="Prisaack 2014">
+<ion-view title="Events">
 
-	<ion-nav-buttons side="right">
-		  <button class="button button-icon icon ion-ios7-plus-empty" ng-click="eventModal.show()">
-		   
+	<ion-nav-buttons side="right" >
+		  <button class="button button-icon" ng-click="eventModal.show()" ng-show-auth="login">
+		   <i class="icon ion-ios7-plus-empty" ng-show-auth="login"></i>
 		  </button>
 	</ion-nav-buttons>
 	
@@ -30,7 +30,7 @@
 		  	
 
 		  	
-		  	<ion-option-button class="button-assertive"
+		  	<ion-option-button ng-show="true" class="button-assertive"
 				                 ng-click="events.$remove(event)">Remove
 			</ion-option-button>
 	  </ion-item>

@@ -1,0 +1,30 @@
+
+<div class="modal" ng-controller="PositionModalCtrl">
+	
+	<ion-header-bar class="bar bar-header bar-light">
+	    <button ng-click="hidePositionModal()" class="button button-positive button-icon ion-ios7-arrow-back">
+	    </button>
+	    <h1 class="title">Choose Position</h1>	
+	</ion-header-bar>
+
+
+	<ion-content>
+		
+		<div class="list">
+
+		 <label class="item item-radio" ng-repeat="position in positions" ng-click="assignPosition(position)">
+			   <input type="radio" name="group" ng-model="position.name" ng-value="position.name" >
+
+				   <a class="item item-icon-left">
+				    	<i class="icon ion-ribbon-b"></i>
+				      {{position.name}}
+				   </a>
+
+				   <i class="radio-icon ion-checkmark"></i>
+			</label>
+
+		</div>
+
+	</ion-content>
+
+</div>

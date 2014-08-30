@@ -1,7 +1,7 @@
-<ion-view title="Day 1- {{event.$id}}">
+<ion-view title="{{event.title}}">
 
 	<ion-nav-buttons side="right">
-		  <button class="button button-icon icon ion-ios7-plus-empty" ng-click="activityModal.show()">
+		  <button class="button button-icon icon ion-ios7-plus-empty" ng-click="activityModal.show()" ng-show-auth="login">
 		   
 		  </button>
 	</ion-nav-buttons>
@@ -17,37 +17,28 @@
 
 
 	  <div class="list">
-
 	    <div ng-repeat="time in activities | filter : {eventId : event.$id} | groupBy:'time'">
-
 	        <div class="item item-divider">
 			    {{time}}
 			</div>
-
-	        
-
 			<a  class="item  item-icon-left item-icon-right" 
-				ng-repeat="game in games = (activities | filter: {time: time} )" href="#/tab/activity-detail/{{game.$id}}">
+				ng-repeat="game in games = (activities | filter: {time: time} )" 
+				href="#/tab/activity-detail/{{game.$id}}">
 				
 				<i class="icon {{game.gameIcon}}"></i>
-				
-				{{game.teams.team1.schoolId}} vs. {{game.teams.team2.schoolId}}
-				<br/>
-
+				<i ng-if="!game.isMultiplayer">{{game.teams.team1.schoolId}} vs. {{game.teams.team2.schoolId}}<br/></i>
 				{{game.gameName}}   {{game.category}}
 			 	
 			 	<p>{{game.venue}}, Game #{{game.gameNo}}</p>
-			 	<p> </p>
-				<i class="badge badge-balanced ion-trophy" ng-show="!(game.winner=='?')"> &nbsp;Winner : {{game.winner}}</i>
+				<i class="badge badge-balanced ion-trophy" 
+					ng-show="!(game.winner=='?')">
+					 &nbsp;Winner : {{game.winner}}
+					 
+				</i>
 			</a>
 
-	    
-
 	        </div>
-
 	  </div>
-
-
 
   	</ion-content>
 

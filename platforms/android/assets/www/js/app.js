@@ -5,15 +5,22 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','firebase','ui.bootstrap.datetimepicker'])
+angular.module('starter', [
+    'ionic',
+    'starter.controllers',
+    'starter.services','firebase',
+    'ui.bootstrap.datetimepicker',
+    'simpleLoginTools'
+])
 
-.run(function($ionicPlatform, $rootScope, Prisaack) {
+.run(function($ionicPlatform, $rootScope, Prisaack, $window, $ionicLoading,$firebaseSimpleLogin,FIREBASE_URL) {
   $ionicPlatform.ready(function() {
 
     $rootScope.events = Prisaack.allEvents();
     $rootScope.activities = Prisaack.allActivities();
     $rootScope.schools = Prisaack.allSchools();
     $rootScope.scores = Prisaack.allScores();
+    $rootScope.points = Prisaack.allPoints();
 
     $rootScope.addQuarter = function(refId, quarterName) {
           $rootScope.scores.$add({
@@ -22,7 +29,39 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
             team1score : 0,
             team2score : 0
             })
-      }
+    }
+
+    // Simple login
+    var ref = new Firebase(FIREBASE_URL);
+    $rootScope.auth = $firebaseSimpleLogin(ref);
+
+
+    $rootScope.show = function(text) {
+      $rootScope.loading = $ionicLoading.show({
+        content: text ? text : 'Loading..',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+    };
+
+    $rootScope.hide = function() {
+      $ionicLoading.hide();
+    };
+
+    $rootScope.notify = function(text) {
+      $rootScope.show(text);
+      $window.setTimeout(function() {
+        $rootScope.hide();
+      }, 1999);
+    };
+ 
+    $rootScope.logout = function() {
+      $rootScope.auth.$logout();
+    };
+ 
+
     
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -108,6 +147,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','f
         'tab-about': {
           templateUrl: 'templates/tab-about.html',
           controller: 'AboutCtrl'
+        }
+      }
+    })
+
+    .state('tab.about-login', {
+      url: '/about/login',
+      views: {
+        'tab-about': {
+          templateUrl: 'templates/login.html',
+          controller: 'LoginCtrl'
         }
       }
     });

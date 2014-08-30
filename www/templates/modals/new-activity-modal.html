@@ -1,6 +1,7 @@
       <div class="modal" ng-controller="ActivityModalCtrl">
 
       	<ion-header-bar class="bar bar-header bar-positive">
+            
 
       	<button ng-click="hideActivityModal()" class="button button-positive button-icon ion-ios7-arrow-back"></button>
       	<h1 class="title"></h1>
@@ -12,7 +13,13 @@
 
       <div class="list">
 
-      	<label class="item item-input item-floating-label">
+            <ion-toggle
+                    ng-model="settings.checked" 
+                    ng-checked="settings.checked">
+                {{ settings.text }}
+            </ion-toggle>
+
+      	<label class="item item-input item-stacked-label">
       		<span class="input-label">Game Number</span>
       		<input ng-model="newActivity.gameNo" type="text" placeholder="Game Number">
       	</label>
@@ -26,17 +33,19 @@
       		<h2>{{newActivity.game.gameName}}</h2>
       	</label>
 
-      	<label class="item item-input item-floating-label">
+      	<label class="item item-input item-stacked-label">
       		<span class="input-label">Category</span>
       		<input ng-model="newActivity.category" type="text" placeholder="Category">
       	</label>
 
       	<label class="item item-icon-right">
       		<select style="opacity:0; width:100%; position:absolute; z:index=100" 
-      		ng-model="newActivity.team1" ng-options="school.$id for school in schoolList"></select>
+      		ng-model="newActivity.team1" 
+                  ng-options="school.$id for school in schoolList"
+                  ng-disabled="settings.checked"></select>
 
       		<i class="icon ion-ios7-arrow-down"></i>
-      		<span class="input-label">Team 1</span>
+      		<span class="input-label" ng-disabled="settings.checked">Team 1</span>
       		<h2>{{newActivity.team1.name}}</h2>
       	</label>
 
@@ -49,22 +58,17 @@
       		<h2>{{newActivity.team2.name}}</h2>
       	</label>	
       	
-      	<label class="item item-input item-floating-label">
+      	<label class="item item-input item-stacked-label">
       		<span class="input-label">Venue</span>
       		<input ng-model="newActivity.venue" type="text" placeholder="Venue">
       	</label>
-
-      	<label class="item item-input item-floating-label">
-      		<span class="input-label">Points</span>
-      		<input ng-model="newActivity.points" type="text" placeholder="Points">
-      	</label>
       	
-      	<label class="item item-input item-floating-label" ng-click="openFromTimePicker()">
+      	<label class="item item-input item-stacked-label" ng-click="openFromTimePicker()">
       		<span class="input-label">From</span>
       		<input type="text" ng-model="newActivity.formattedFromTime" placeholder="From">
       	</label>
 
-      	<label class="item item-input item-floating-label" ng-click="openToTimePicker()">
+      	<label class="item item-input item-stacked-label" ng-click="openToTimePicker()">
       		<span class="input-label">To</span>
       		<input type="text" ng-model="newActivity.formattedToTime" placeholder="To">
       	</label>

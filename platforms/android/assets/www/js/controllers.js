@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+// Events Controllers
 .controller('EventsCtrl', ['$rootScope','$scope', '$ionicModal', 
     function($rootScope, $scope,$ionicModal) {
     	$ionicModal.fromTemplateUrl('templates/modals/new-event-modal.html', function(modal) {
@@ -23,32 +24,33 @@ angular.module('starter.controllers', [])
           focusFirstInput: true
       });
 
-      $scope.eventlist = [
-          {time: '7:30 AM - 8: 30 AM', player1: 'KCC', player2: 'FBC', sportname : 'Basketball (Mens)', location: 'KCC Gym'},
-          {time: '7:30 AM - 8: 30 AM', player1: 'FBC', player2: 'FC', sportname : 'Basketball (Mens)', location: 'KCC Gym'},
-          {time: '8:30 AM - 9: 30 AM', player1: 'KCC', player2: 'FBC', sportname : 'Volleyball (Mens)', location: 'KCC Gym'},
-          {time: '8:30 AM - 9: 30 AM', player1: 'FBC', player2: 'FC', sportname : 'Volleyball (Mens)', location: 'KCC Gym'},
-          {time: '8:30 AM - 9: 30 AM', player1: 'FBC', player2: 'FC', sportname : 'Volleyball (Mens)', location: 'KCC Gym'},
-          {time: '8:30 AM - 9: 30 AM', player1: 'FBC', player2: 'FC', sportname : 'Volleyball (Mens)', location: 'KCC Gym'},
-          {time: '8:30 AM - 9: 30 AM', player1: 'FBC', player2: 'FC', sportname : 'Volleyball (Mens)', location: 'KCC Gym'},
-          {time: '8:30 AM - 9: 30 AM', player1: 'FBC', player2: 'FC', sportname : 'Volleyball (Mens)', location: 'KCC Gym'},
-      ];
+      
 }])
 
-.controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', '$ionicPopup', '$ionicModal',
-  function($rootScope, $scope, $stateParams,$ionicPopup,$ionicModal) {
+.controller('ActivityDetailCtrl', ['$rootScope', '$scope', '$stateParams', '$ionicPopup', '$ionicModal', '$firebase',
+  function($rootScope, $scope, $stateParams,$ionicPopup,$ionicModal,$firebase) {
       var key = $stateParams.activityId;
       $rootScope.activity = $rootScope.activities.$getRecord(key);
 
+      // Winner Modal
       $ionicModal.fromTemplateUrl('templates/modals/add-winner-modal.html', function(modal) {
           $rootScope.pickWinner = modal;
       }, {
           animation: 'slide-in-up',
           focusFirstInput: true
-      })
+      })    
 
+      // Rewards Modal
       $ionicModal.fromTemplateUrl('templates/modals/add-point-modal.html', function(modal) {
           $rootScope.rewardPoints = modal;
+      }, {
+          animation: 'slide-in-up',
+          focusFirstInput: true
+      })
+
+      // Position Modal
+      $ionicModal.fromTemplateUrl('templates/modals/choose-position-modal.html', function(modal) {
+          $rootScope.choosePosition = modal;
       }, {
           animation: 'slide-in-up',
           focusFirstInput: true
@@ -148,26 +150,149 @@ angular.module('starter.controllers', [])
           }); 
       }
 
+      
+      $scope.showPositionModal = function(team) {
+        $rootScope.updateTeam = '';
+        $rootScope.updateTeam = team;
+        $rootScope.choosePosition.show();
+      }
 
 
 }])
-.controller('ResultsCtrl',['$scope','Friends', 
-  function($scope, Friends) {
-  $scope.friends = Friends.all();
+
+// Results Controllers
+.controller('ResultsCtrl',['$scope', '$rootScope',
+  function($scope,$rootScope) {
+    
+
+    $scope.getClass = function(x) {
+      if (x> 0) {
+        return "badge badge-balanced";
+      } else {
+        return "badge badge-energized";
+      }
+    }
+
+    $scope.getScore = function(schoolPts) {
+      var totalNumber = 0;
+      for(i=0; i<schoolPts.length; i++){
+      totalNumber = totalNumber + Number(schoolPts[i].points);
+      }
+      return totalNumber;
+    }
+
+    $scope.moveItem = function(school, fromIndex, toIndex) {
+      $rootScope.schools.splice(fromIndex, 1);
+      $rootScope.schools.splice(toIndex, 0, school);
+    };
+
 }])
 
 .controller('ResultDetailCtrl', ['$rootScope','$scope', '$stateParams', 'Friends',
   function($rootScope,$scope, $stateParams, Friends) {
     var key = $stateParams.schoolId;
     $rootScope.school = $rootScope.schools.$getRecord(key);
+
+    $scope.getGameName = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.gameName;
+    }
+
+    $scope.getTeams = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.teams.team1.schoolId + ' vs. ' + activityRef.teams.team2.schoolId;
+    }
+
+    $scope.getIcon = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.gameIcon;
+    }
+    
+    $scope.getCategory = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.category;
+    }
+
+    $scope.getVenue = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return activityRef.venue;
+    }
+
+    $scope.getGameNo = function(key) {
+      var activityRef = $rootScope.activities.$getRecord(key);
+      return 'Game # ' + activityRef.gameNo;
+    }
 }])
 
-.controller('AboutCtrl', ['$scope',
-  function($scope) {
+
+// About Controllers
+.controller('AboutCtrl', ['$scope', '$window', '$rootScope',
+  function($scope,$window,$rootScope) {
+    $scope.feedback = function() {
+      $window.open('http://www.jotformeu.com/form/42360794496364', '_blank', 'location=yes');
+    }
+
+    $scope.facebook = function() {
+      $window.open('http://www.facebook.com/jpecson90210', '_blank', 'location=yes');
+    }
+
+    $scope.logout = function() {
+      console.log('Logout');
+      $rootScope.logout();
+      
+    };
+ }])
+
+.controller('LoginCtrl',[ '$scope', '$rootScope',  '$window',
+  function($scope, $rootScope,  $window) {
+
+     $scope.user = {
+        email: "",
+        password: ""
+     };
+     $scope.validateUser = function () {
+
+        $rootScope.show('Please wait.. Authenticating');
+        var email = this.user.email;
+        var password = this.user.password;
+        if (!email || !password) {
+           $rootScope.notify("Please enter valid credentials");
+            $rootScope.show('Email and Password must not be blank.')
+           return false;
+        }
+
+        var promise = $rootScope.auth.$login('password', {
+           email: email,
+           password: password
+        });
+
+        promise.then(function (user) {
+           $rootScope.notify('You are now logged in.');
+          $rootScope.hide();
+          $rootScope.rootUser = user;
+          $window.location.href = ('#/tab/about');
+        }, function (error) {
+          $rootScope.hide();
+          if (error.code == 'INVALID_EMAIL') {
+            $rootScope.notify('Invalid Email Address');
+          }
+          else if (error.code == 'INVALID_PASSWORD') {
+            $rootScope.notify('Invalid Password');
+          }
+          else if (error.code == 'INVALID_USER') {
+            $rootScope.notify('Invalid User');
+          }
+          else {
+            $rootScope.notify('Oops something went wrong. Please try again later');
+          }
+        });
+     }
+
+     
  }])
 
 
-// Modals
+// Event Modals
 .controller('EventModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$filter',
   function($rootScope,$scope, $ionicPopup, $filter) {
     
@@ -217,6 +342,11 @@ angular.module('starter.controllers', [])
     function($rootScope,$scope, $ionicPopup, $filter, $firebase) {
       
       $scope.newActivity = {};
+
+      $scope.settings = {
+        text: "Multiplayer",
+        checked: false 
+      };
 
       //Games Enum
       $scope.games = [
@@ -286,35 +416,57 @@ angular.module('starter.controllers', [])
       }
 
       $scope.createActivity  = function() {
-
+        var isMultiplayer = $scope.settings.checked;
         var newActivity = $scope.newActivity;
         var gameTime = newActivity.formattedFromTime + ' - ' + newActivity.formattedToTime;
         
-        $rootScope.activities.$add({
-          eventId : $rootScope.event.$id,
-          gameNo : newActivity.gameNo,
-          gameIcon : newActivity.game.icon,
-          gameName : newActivity.game.gameName,
-          category : newActivity.category,
-          venue : newActivity.venue,
-          time : gameTime,
-          points : newActivity.points,
-          teams : {    
-            team1 : {schoolId : newActivity.team1.$id, score : 0},
-            team2 : {schoolId : newActivity.team2.$id, score : 0}
-          }
-        }).then(function(ref) {
-           var refId = ref.name();
-           var quarterName = '1st Quarter';
-           $rootScope.addQuarter(refId,quarterName);
-        })
+        if (isMultiplayer) {
+          $rootScope.activities.$add({
+            eventId : $rootScope.event.$id,
+            gameNo : newActivity.gameNo,
+            gameIcon : newActivity.game.icon,
+            gameName : newActivity.game.gameName,
+            category : newActivity.category,
+            venue : newActivity.venue,
+            time : gameTime,
+            isMultiplayer : isMultiplayer,
+            winner : '?',
+            teams : {    
+              team1 : {schoolId : 'FBC',position : 0, teamName:'team1'},
+              team2 : {schoolId : 'FC',position : 0, teamName:'team2'},
+              team3 : {schoolId : 'KCC',position : 0, teamName:'team3'},
+              team4 : {schoolId : 'TACEA',position : 0, teamName:'team4'}
+            }
+          })
+          
+        } else {
+          $rootScope.activities.$add({
+            eventId : $rootScope.event.$id,
+            gameNo : newActivity.gameNo,
+            gameIcon : newActivity.game.icon,
+            gameName : newActivity.game.gameName,
+            category : newActivity.category,
+            venue : newActivity.venue,
+            time : gameTime,
+            isMultiplayer : isMultiplayer,
+            winner : '?',
+            teams : {    
+              team1 : {schoolId : newActivity.team1.$id},
+              team2 : {schoolId : newActivity.team2.$id}
+            }
+          }).then(function(ref) {
+             var refId = ref.name();
+             var quarterName = '1st Quarter';
+             $rootScope.addQuarter(refId,quarterName);
+          })
+        }
 
         $scope.newActivity  = {};
         $rootScope.activityModal.hide();
       }
 }])
-.controller('WinnerModalCtrl', ['$rootScope', '$scope', '$firebase',
-  function($rootScope,$scope,$firebase){
+.controller('WinnerModalCtrl', ['$rootScope', '$scope',
+  function($rootScope,$scope){
 
     $scope.teams = $rootScope.activity.teams;
 
@@ -330,18 +482,85 @@ angular.module('starter.controllers', [])
         $rootScope.pickWinner.hide();
     }
 }])
-.controller('PointsModalCtrl', ['$rootScope', '$scope',
-  function($rootScope,$scope){
+.controller('PointsModalCtrl', ['$rootScope', '$scope', '$ionicPopup', '$firebase',
+  function($rootScope,$scope,$ionicPopup, $firebase){
 
     $scope.teams = $rootScope.activity.teams;
+    $rootScope.team = {};
 
     $scope.hidePointsModal = function() {
         $rootScope.rewardPoints.hide();
     }
 
-    $scope.addPoints= function(team) {
-        console.log(team);
+    $scope.addPoints= function(res) {
+        var point = res;
+        $rootScope.points.$add({
+          activityId : point.activityId,
+          schoolId : point.schoolId, 
+          points : point.points 
+        });
+        console.log(point);
         $rootScope.rewardPoints.hide();
     }
-}]);
 
+    // Called to create new event
+    $scope.showPoints = function(schoolId) {
+          $scope.tmp = {};
+          $scope.tmp.points = $rootScope.team.points;
+          var myPopup = $ionicPopup.show({
+              template: '<input type="text" ng-model="tmp.points" placeholder="10">',
+              title: 'Specify points',
+              scope: $scope,
+              buttons: [
+                {  text: 'Cancel' },
+                {
+                  text: '<b>Save</b>',
+                  type: 'button-positive',
+                  onTap: function(e) {
+                      //Proceed if newRound is not null
+                      if (!$scope.tmp.points) {
+                          //don't allow the user to close unless he enters event name
+                          e.preventDefault();
+                        } else {
+                           $rootScope.team.points = $scope.tmp.points;
+                           $rootScope.team.schoolId = schoolId;
+                           $rootScope.team.activityId = $rootScope.activity.$id;
+                           return $rootScope.team;
+                        }
+                      }
+                }
+              ]
+          }); 
+          myPopup.then(function(res) {
+            if (res) {
+                $scope.addPoints(res);
+            };
+             
+          });       
+      }
+      
+
+}])
+.controller('PositionModalCtrl',['$rootScope', '$scope',
+  function($rootScope,$scope){
+    $scope.positions = [
+    {name:'1st' , value : 1},
+    {name:'2nd' , value : 2},
+    {name:'3rd' , value : 3},
+    {name:'4th' , value : 4}
+    ]
+
+    $scope.hidePositionModal = function() {
+      $rootScope.choosePostion.hide();
+    }
+
+    $scope.assignPosition = function(position) {
+      var actId = $rootScope.activity.$id;
+      var teamName = $rootScope.updateTeam.teamName;
+    
+      $rootScope.activity.teams[teamName].position = position.name;
+      $rootScope.activities.$save($rootScope.activity);
+      
+      $rootScope.choosePosition.hide();
+    }
+}])
