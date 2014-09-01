@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/jpecson90210/prisaack-scores.png?label=ready&title=Ready)](https://waffle.io/jpecson90210/prisaack-scores)
 Ionic App Base
 =====================
 
