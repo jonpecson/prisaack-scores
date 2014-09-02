@@ -21,7 +21,7 @@
         <p>{{school.name}}</p>
 
         <span ng-class="getClass((points | filter:{schoolId:school.$id}).length)">
-            {{getScore((points | filter:{schoolId:school.$id}))}} Pts
+            {{getScore((points | filter:{schoolId:school.$id}))}} pts
         </span>
 
         <ion-reorder-button class="ion-ios7-drag" 

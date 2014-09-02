@@ -16,12 +16,8 @@ angular.module('starter', [
 .run(function($ionicPlatform, $rootScope, Prisaack, $window, $ionicLoading,$firebaseSimpleLogin,FIREBASE_URL) {
   $ionicPlatform.ready(function() {
 
-    $rootScope.events = Prisaack.allEvents();
-    $rootScope.activities = Prisaack.allActivities();
-    $rootScope.schools = Prisaack.allSchools();
-    $rootScope.scores = Prisaack.allScores();
-    $rootScope.points = Prisaack.allPoints();
-
+    Prisaack.initializeData();
+    
     $rootScope.addQuarter = function(refId, quarterName) {
           $rootScope.scores.$add({
             activityId: refId,

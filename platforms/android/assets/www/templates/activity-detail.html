@@ -1,109 +1,111 @@
-<ion-view title="{{activity.gameName}}"  >
-
-	
-
-	<ion-content has-header="true" >
-		<div class="button-bar" ng-show-auth="login">
-		  <a ng-if="!activity.isMultiplayer" class="button button-clear   button-positive ion-ios7-stopwatch" ng-click="newQuarter()"> Round</a>
-		  <a class="button button-clear   button-balanced ion-ios7-heart" ng-click="showWinnerModal()"> Winner</a>
-		  <a class="button button-clear   button-energized ion-ios7-star" ng-click="showPointsModal()"> Points</a>
-		</div>
-
-		 
-
-			<div class="list">
-
-				<div ng-if="!activity.isMultiplayer">
-					<div class="item item-divider align-center">
-						Final Score
-					</div>
-
-					<div ng-repeat="quarter in scores | filter : {activityId : activity.$id}">
-						<div ng-show="$last">
-							<div class="row">
-
-								<div class="col">
-									<div class="list card">
-										<div class="row">
-											<div class="col">
-												<h1>{{quarter.team1score}}</h1>
-												<h3>{{activity.teams.team1.schoolId}}</h3>
-											</div>
-										</div>
-									</div>
-								</div>
-								<br/>	<br/>	<br/>
-								<div class="col">
-									<div class="list card">
-										<div class="row">
-											<div class="col">
-												<h1>{{quarter.team2score}}</h1>
-												<h3>{{activity.teams.team2.schoolId}}</h3>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-
-						</div>	
-					</div>
+<ion-view title="{{activity.gameName}}">
 
 
 
-
-					<div ng-repeat="quarter in scores | filter : {activityId : activity.$id}">
-						<div class="item item-divider align-center">
-							{{quarter.name}}
-						</div>
-
-						<div class="row">
-
-							<div class="col">
-								<div class="list card">
-									<div class="row">
-										<div class="col">
-											<h2>{{quarter.team1score}}</h2>
-											<button class="button button-small button-light ion-edit" ng-show-auth="login" ng-click="editScore1(quarter)">  Edit</button>
-											<h4>{{activity.teams.team1.schoolId}}</h4>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="col">
-								<div class="list card">
-									<div class="row">
-										<div class="col">
-											<h2>{{quarter.team2score}}</h2>
-											<button class="button button-small button-light ion-edit" ng-show-auth="login" ng-click="editScore2(quarter)">  Edit</button>
-											<h4>{{activity.teams.team2.schoolId}}</h4>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div> <br/>
-
-					</div>
-				</div>
-
-				<div ng-if="activity.isMultiplayer">
-					<div ng-repeat="team in activity.teams">
-						<div class="item" ng-click="showPositionModal(team)">
-							{{team.schoolId}}
-						<span class="badge badge-balanced" ng-if="team.position!==0">
-							{{team.position}}
-						</span>
-						</div>
-
-					</div>
-
-				</div>
-			
-			</div>
-  	</ion-content>
+    <ion-content has-header="true">
+    
+        <div class="button-bar" ng-show-auth="login">
+            <a ng-if="!activity.isMultiplayer" class="button button-clear   button-positive ion-ios7-stopwatch" ng-click="newQuarter()"> Round</a>
+            <a class="button button-clear   button-balanced ion-ios7-heart" ng-click="showWinnerModal()"> Winner</a>
+            <a class="button button-clear   button-energized ion-ios7-star" ng-click="showPointsModal()"> Points</a>
+        </div>
 
 
-  	
+
+        <div class="list">
+
+            <div ng-if="!activity.isMultiplayer">
+                <div class="item item-divider align-center">
+                    Final Score
+                </div>
+
+                <div ng-repeat="quarter in scores | filter : {activityId : activity.$id}">
+                    <div ng-show="$last">
+                        <div class="row">
+
+                            <div class="col">
+                                <div class="list card">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h1>{{quarter.team1score}}</h1>
+                                            <h3>{{activity.teams.team1.schoolId}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
+                            <br/>
+                            <br/>
+                            <div class="col">
+                                <div class="list card">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h1>{{quarter.team2score}}</h1>
+                                            <h3>{{activity.teams.team2.schoolId}}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-repeat="quarter in scores | filter : {activityId : activity.$id}">
+                    <div class="item item-divider align-center">
+                        {{quarter.name}}
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col">
+                            <div class="list card">
+                                <div class="row">
+                                    <div class="col">
+                                        <h2>{{quarter.team1score}}</h2>
+                                        <button class="button button-small button-light ion-edit" ng-show-auth="login" ng-click="editScore1(quarter)">Edit</button>
+                                        <h4>{{activity.teams.team1.schoolId}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="list card">
+                                <div class="row">
+                                    <div class="col">
+                                        <h2>{{quarter.team2score}}</h2>
+                                        <button class="button button-small button-light ion-edit" ng-show-auth="login" ng-click="editScore2(quarter)">Edit</button>
+                                        <h4>{{activity.teams.team2.schoolId}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br/>
+
+                </div>
+            </div>
+
+
+
+            <div ng-if="activity.isMultiplayer">
+                <div ng-repeat="team in activity.teams">
+                    <div class="item" ng-click="showPositionModal(team)">
+                        <p>{{team.schoolId}}</p>
+                        <span class="badge badge-balanced" ng-if="team.position!==0">
+                            {{team.position}}
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </ion-content>
+
+
+
 </ion-view>

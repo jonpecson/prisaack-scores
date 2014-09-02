@@ -34,34 +34,53 @@ angular.module('starter.services', [])
   };
 })
 
-.factory('Prisaack', function($firebase, firebaseFactory) {
-  return {
+.factory('Prisaack', function($firebase, firebaseFactory, FIREBASE_URL, $rootScope, $window) {
 
-    allEvents  : function() {
+
+  var allEvents  = function() {
       var list  = firebaseFactory.getRefFor('Events').$asArray();
       return list;
-    },
+    }
 
-    allActivities : function () {
+    var allActivities = function() {
       var list  = firebaseFactory.getRefFor('Activities').$asArray();
       return list;
-    },
+    }
 
-    allSchools : function () {
+    var allSchools = function() {
       var list = firebaseFactory.getRefFor('Schools').$asArray();
       return list;
-    },
+    }
 
-    allScores : function () {
+    var allScores = function() {
       var list = firebaseFactory.getRefFor('Scores').$asArray();
       return list;
-    },
+    }
 
-    allPoints : function () {
+    var allPoints = function() {
       var list = firebaseFactory.getRefFor('Points').$asArray();
       return list;
-    },
- 
+    }
+
+  return {
+    initializeData : function() {
+      var ref = new Firebase(FIREBASE_URL + "/.info/connected");
+
+      ref.on("value", function(snap) {
+        
+        if (snap.val() === true) {
+          console.log("The connection has been established.");
+          $rootScope.events = allEvents();
+          $rootScope.activities = allActivities();
+          $rootScope.schools = allSchools();
+          $rootScope.scores = allScores();
+          $rootScope.points = allPoints();
+         
+        } else {
+          console.log("You are not connected to the internet.");
+        }
+      })
+    }
   };
 
 })

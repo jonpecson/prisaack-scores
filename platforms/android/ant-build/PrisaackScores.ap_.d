@@ -1,3 +1,4 @@
+C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\ant-build\PrisaackScores.ap_ \
  : C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable\icon.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable-hdpi\icon.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\res\drawable-hdpi\ic_action_next_item.png \
@@ -74,27 +75,19 @@ C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\css\fonts\icomoon.ttf \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\css\fonts\icomoon.woff \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\1.jpg \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\2.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\3.jpg \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\4.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\5.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\6.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\7.jpg \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\8.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\9.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\bg.jpg \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\cubes.png \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\dunes.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\fbc.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\fc.jpg \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\ionic.png \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\jp.jpg \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\jp1.jpg \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\jp2.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\jp3.jpg \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\kcc.JPG \
+C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\kcc.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\nepal.jpg \
-C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\sea.jpg \
+C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\prisaacck cover_2.jpg \
+C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\prisaacck.png \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\img\tacea.jpg \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\js\app.js \
 C:\Users\Jp Pecson\Copy\Projects\Dev\PrisaackScores\platforms\android\assets\www\js\controllers.js \

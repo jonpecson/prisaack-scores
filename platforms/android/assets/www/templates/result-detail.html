@@ -13,23 +13,24 @@
 	  	<div id="content">
 
 	  		<div id="profile-info">
-	  			<img id="profile-image" ng-src="{{school.logo}}">
+	  			<img id="profile-image" class="circle" ng-src="{{school.logo}}">
 	  			<h3 id="profile-name">{{school.$id}}</h3>
 	  			<span id="profile-description">{{school.name}}</span>
 	  		</div>
 
 	  		<div class="list">
 		  		<a 	ng-repeat="point in points | filter : {schoolId : school.$id}" 
-		  					class="item item-icon-left item item-icon-right"
-		  					href="#/tab/activity-detail/{{point.activityId}}">
+		  					class="item item-icon-left item item-icon-right">
+						<!-- href="#/tab/activity-detail/{{point.activityId}}"> -->
 
 			  		<i class="icon {{getIcon(point.activityId)}}"></i>
+			  		<!-- {{getTeams(point.activityId)}} -->
+			  		{{getGameName(point.activityId)}}  
+			  		<p>{{getCategory(point.activityId)}}</p>
+			  		<p>{{point.position}} Place</p>
+			  		<!-- <p>{{getVenue(point.activityId)}}, {{getGameNo(point.activityId)}}</p> -->
+			  		<span class="badge badge-balanced">+{{point.points}} pts</span>
 
-			  		{{getTeams(point.activityId)}}
-			  		<br/>
-			  		{{getGameName(point.activityId)}}  {{getCategory(point.activityId)}}
-			  		<p>{{getVenue(point.activityId)}}, {{getGameNo(point.activityId)}}</p>
-			  		<span class="badge badge-balanced">+ {{point.points}} Pts</span>
 		  		</a>
 	 	 	</div class="list">
 

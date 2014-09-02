@@ -24,6 +24,8 @@ angular.module('starter.controllers', [])
           focusFirstInput: true
       });
 
+      // $scope.formatDate = function(utcDate) { return moment(utcDate).format("ll"); }
+
       
 }])
 
@@ -300,7 +302,8 @@ angular.module('starter.controllers', [])
 
     $scope.$watch('newEvent.date', function(unformattedDate){
       $scope.newEvent.formattedDate = $filter('date')(unformattedDate, 'dd/MM/yyyy');
-      $scope.newEvent.fullDate = $filter('date')(unformattedDate,'fullDate');
+
+      $scope.newEvent.fullDate = moment(unformattedDate).format();
     });
 
     $scope.createEvent = function() {
@@ -350,12 +353,14 @@ angular.module('starter.controllers', [])
 
       //Games Enum
       $scope.games = [
-        {gameName:'Basketball', icon:'icon-basketball35'},
-        {gameName:'Volleyball', icon:'ion-ios7-football-outline'},
-        {gameName:'Football', icon:'ion-ios7-football'},
-        {gameName:'Table Tennis', icon:'icon-ping3'},
-        {gameName:'Tennis', icon:'icon-tennis18'},
-        {gameName:'Swimming', icon:'icon-swimming20'}
+        {gameName:'Basketball', icon:'icon-basketball35', roundName: '1st Quarter'},
+        {gameName:'Volleyball', icon:'ion-ios7-football-outline', roundName: '1st Set'},
+        {gameName:'Football', icon:'ion-ios7-football', roundName: '1st Half'},
+        {gameName:'Table Tennis', icon:'icon-ping3', roundName: '1st Set'},
+        {gameName:'Tennis', icon:'icon-tennis18', roundName: '1st Set'},
+        {gameName:'Swimming', icon:'icon-swimming20'},
+        {gameName:'Track & Field', icon:'icon-runner5'}
+
       ];
 
       $scope.schoolList = $rootScope.schools;
@@ -456,7 +461,7 @@ angular.module('starter.controllers', [])
             }
           }).then(function(ref) {
              var refId = ref.name();
-             var quarterName = '1st Quarter';
+             var quarterName = newActivity.game.roundName;
              $rootScope.addQuarter(refId,quarterName);
           })
         }
@@ -497,7 +502,8 @@ angular.module('starter.controllers', [])
         $rootScope.points.$add({
           activityId : point.activityId,
           schoolId : point.schoolId, 
-          points : point.points 
+          points : point.points,
+          position : point.position 
         });
         console.log(point);
         $rootScope.rewardPoints.hide();
@@ -508,7 +514,7 @@ angular.module('starter.controllers', [])
           $scope.tmp = {};
           $scope.tmp.points = $rootScope.team.points;
           var myPopup = $ionicPopup.show({
-              template: '<input type="text" ng-model="tmp.points" placeholder="10">',
+              template: '<input type="text" ng-model="tmp.points" placeholder="Points"> <br/><input type="text" ng-model="tmp.position" placeholder="Position">',
               title: 'Specify points',
               scope: $scope,
               buttons: [
@@ -523,6 +529,7 @@ angular.module('starter.controllers', [])
                           e.preventDefault();
                         } else {
                            $rootScope.team.points = $scope.tmp.points;
+                           $rootScope.team.position = $scope.tmp.position;
                            $rootScope.team.schoolId = schoolId;
                            $rootScope.team.activityId = $rootScope.activity.$id;
                            return $rootScope.team;
@@ -532,7 +539,7 @@ angular.module('starter.controllers', [])
               ]
           }); 
           myPopup.then(function(res) {
-            if (res) {
+            if (res) { 
                 $scope.addPoints(res);
             };
              

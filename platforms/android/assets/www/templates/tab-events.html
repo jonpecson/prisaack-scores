@@ -17,20 +17,15 @@
 		 </label>
 	</div>
 
-	<ion-list ng-repeat="event in events" can-swipe="true">
-
-		
+	<ion-list ng-repeat="event in events | filter : searchKey | orderBy : 'date'" can-swipe="false">
 
 	  <ion-item class="item item-icon-left item-icon-right" href="#/tab/event/{{event.$id}}">
 		  	<i class="icon ion-ios7-calendar-outline"></i>
-		  		{{event.title}}
-		  	<p>{{ event.date  | date:'EEEE, MMMM d, y'}}</p>
+		  	<i ng-if="event.title">{{event.title}} <br/> </i>
+		  	{{ event.date  | date:'fullDate'}}
 		  	<i class="icon ion-ios7-arrow-right"></i>
-			
-		  	
 
-		  	
-		  	<ion-option-button ng-disabled="true" ng-show="false" class="button-assertive"
+		  	<ion-option-button ng-show="true" class="button-assertive"
 				                 ng-click="events.$remove(event)">Remove
 			</ion-option-button>
 	  </ion-item>

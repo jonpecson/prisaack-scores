@@ -1,4 +1,4 @@
-<ion-view title="{{event.title}}">
+<ion-view title="{{event.date  | date:'MMMM d, y'}}">
 
 	<ion-nav-buttons side="right">
 		  <button class="button button-icon icon ion-ios7-plus-empty" ng-click="activityModal.show()" ng-show-auth="login">
@@ -8,6 +8,7 @@
 
 	<ion-content has-header="true">
 
+
 	<div class="item item-input-inset">		
 	     <label class="item-input-wrapper">
 		    <i class="icon ion-search placeholder-icon"></i>
@@ -16,13 +17,13 @@
 	</div>
 
 
-	  <div class="list">
-	    <div ng-repeat="time in activities | filter : {eventId : event.$id} | groupBy:'time'">
+	  <ion-list ng-repeat="time in activities | filter : {eventId : event.$id} | filter : searchKey | groupBy:'time' | orderBy : 'time'" can-swipe="false">
 	        <div class="item item-divider">
 			    {{time}}
 			</div>
-			<a  class="item  item-icon-left item-icon-right" 
-				ng-repeat="game in games = (activities | filter: {time: time} )" 
+
+			<ion-item class="item item-icon-left item-icon-right" 
+				ng-repeat="game in games = (activities | filter : {eventId : event.$id} | filter: {time: time} )" 
 				href="#/tab/activity-detail/{{game.$id}}">
 				
 				<i class="icon {{game.gameIcon}}"></i>
@@ -30,15 +31,18 @@
 				{{game.gameName}}   {{game.category}}
 			 	
 			 	<p>{{game.venue}}, Game #{{game.gameNo}}</p>
+
 				<i class="badge badge-balanced ion-trophy" 
 					ng-show="!(game.winner=='?')">
-					 &nbsp;Winner : {{game.winner}}
-					 
+					 &nbsp;{{game.winner}} Wins
 				</i>
-			</a>
 
-	        </div>
-	  </div>
+				<ion-option-button ng-show="true" class="button-assertive"
+				                 ng-click="activities.$remove($index)">Remove
+				</ion-option-button>
+			</ion-item>
+
+	  </ion-list>
 
   	</ion-content>
 
